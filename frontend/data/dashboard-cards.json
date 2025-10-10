@@ -1,0 +1,23 @@
+[
+  {
+    "icon": "Shield",
+    "title": "Headmaster's Dashboard",
+    "description": "Oversee all school operations, manage staff, and view comprehensive analytics.",
+    "tasks": ["Approve requests", "Generate reports", "Manage school events"],
+    "href": "/headmaster"
+  },
+  {
+    "icon": "Book",
+    "title": "Teacher's Dashboard",
+    "description": "Manage your classes, grade assignments, and communicate with students and parents.",
+    "tasks": ["Enter grades", "Take attendance", "Post announcements"],
+    "href": "/teacher"
+  },
+  {
+    "icon": "User",
+    "title": "Student's Dashboard",
+    "description": "Access your grades, assignments, and school announcements in one place.",
+    "tasks": ["View grades", "Submit assignments", "Check schedule"],
+    "href": "/student"
+  }
+]
