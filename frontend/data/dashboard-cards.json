@@ -19,5 +19,12 @@
     "description": "Access your grades, assignments, and school announcements in one place.",
     "tasks": ["View grades", "Submit assignments", "Check schedule"],
     "href": "/student"
+  },
+  {
+    "icon": "Users",
+    "title": "Parent's Dashboard",
+    "description": "Monitor your child's progress, view grades, and communicate with teachers.",
+    "tasks": ["View report cards", "Check attendance", "Message teachers"],
+    "href": "/parent"
   }
 ]
