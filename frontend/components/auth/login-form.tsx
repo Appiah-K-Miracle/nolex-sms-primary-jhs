@@ -31,13 +31,18 @@ export default function LoginForm() {
   return (
     <div className="min-h-screen flex">
       {/* Left Pane */}
-      <div className="hidden lg:flex w-1/2 bg-green-600 text-white items-center justify-center p-12">
-        <div className="text-center">
-          <School className="mx-auto h-24 w-24 mb-6" />
-          <h1 className="text-4xl font-bold mb-2">Nolex SMS</h1>
-          <p className="text-lg text-green-200">
-            Seamless Management for Primary and J.H.S
-          </p>
+      <div
+        className="hidden lg:flex w-1/2 bg-cover bg-center p-12"
+        style={{ backgroundImage: "url('https://source.unsplash.com/random/900x1600?school,education')" }}
+      >
+        <div className="w-full h-full flex items-center justify-center bg-green-600 bg-opacity-75 rounded-lg">
+          <div className="text-center text-white">
+            <School className="mx-auto h-24 w-24 mb-6" />
+            <h1 className="text-4xl font-bold mb-2">Nolex SMS</h1>
+            <p className="text-lg text-green-200">
+              Seamless Management for Primary and J.H.S
+            </p>
+          </div>
         </div>
       </div>
 
