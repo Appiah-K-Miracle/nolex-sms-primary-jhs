@@ -1,9 +1,8 @@
-
 "use client";
 
 import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Lock, Mail } from "lucide-react";
+import { Lock, Mail, School } from "lucide-react";
 
 export default function LoginForm() {
   const router = useRouter();
@@ -19,10 +18,8 @@ export default function LoginForm() {
     setError("");
 
     // --- Mock Authentication Logic ---
-    // In a real application, you would have a proper authentication check here.
     if (email && password) {
       console.log("User authenticated (mock)");
-      // Redirect to the originally intended dashboard
       router.push(redirectUrl);
     } else {
       setError("Please enter both email and password.");
@@ -31,9 +28,12 @@ export default function LoginForm() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-white">
-      <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-lg">
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-green-50 to-cyan-50">
+      <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-xl shadow-2xl border border-green-100">
         <div className="text-center">
+          <div className="flex justify-center mb-4">
+            <School className="w-16 h-16 text-green-600" />
+          </div>
           <h1 className="text-3xl font-bold text-green-700">Welcome Back</h1>
           <p className="text-gray-500">Please sign in to access your dashboard.</p>
         </div>
@@ -45,7 +45,7 @@ export default function LoginForm() {
               placeholder="Email Address"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-light-green-500"
+              className="w-full pl-10 pr-4 py-2 border rounded-lg placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-300 focus:border-green-300"
             />
           </div>
           <div className="relative">
@@ -55,13 +55,13 @@ export default function LoginForm() {
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-light-green-500"
+              className="w-full pl-10 pr-4 py-2 border rounded-lg placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-300 focus:border-green-300"
             />
           </div>
-          {error && <p className="text-sm text-red-500">{error}</p>}
+          {error && <p className="text-sm text-center text-red-500">{error}</p>}
           <button
             type="submit"
-            className="w-full px-4 py-2 font-bold text-white bg-green-600 rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+            className="w-full px-4 py-2 font-bold text-white bg-green-600 rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transform transition-transform hover:scale-105"
           >
             Sign In
           </button>
