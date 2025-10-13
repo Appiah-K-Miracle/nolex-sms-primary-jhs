@@ -14,7 +14,8 @@ export default function ViewClassPage() {
   const params = useParams();
   const { id } = params;
 
-  const classData = classes.find((c) => c.id === parseInt(id));
+  const classId = typeof id === 'string' ? parseInt(id, 10) : NaN;
+  const classData = classes.find((c) => c.id === classId);
 
   if (!classData) {
     return <div>Class not found</div>;
