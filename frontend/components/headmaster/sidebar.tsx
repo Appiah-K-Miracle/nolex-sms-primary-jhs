@@ -1,11 +1,10 @@
-
 "use client";
 
 import { useState } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import { 
-  LayoutDashboard, Book, Users, User, DollarSign, Megaphone, ChevronDown, ChevronUp, Settings 
+  LayoutDashboard, Book, Users, User, DollarSign, Megaphone, ChevronDown, ChevronUp, Settings, File 
 } from "lucide-react";
 
 const sidebarItems = [
@@ -38,6 +37,15 @@ const sidebarItems = [
     ],
   },
   { name: "Finance", href: "/headmaster/finance", icon: DollarSign },
+  {
+    name: "Reports",
+    icon: File,
+    subItems: [
+      { name: "Student Reports", href: "/headmaster/reports/student" },
+      { name: "Finance Reports", href: "/headmaster/reports/finance" },
+      { name: "Staff Reports", href: "/headmaster/reports/staff" },
+    ],
+  },
   { name: "Communication", href: "/headmaster/communication", icon: Megaphone },
   {
     name: "Settings",
@@ -54,6 +62,7 @@ const sidebarItems = [
 
 export default function Sidebar() {
   const pathname = usePathname();
+  const router = useRouter();
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
 
   const handleDropdown = (name: string, subItems: any) => {
@@ -79,7 +88,7 @@ export default function Sidebar() {
               {item.subItems ? (
                 <div>
                   <div
-                    onClick={() => handleDropdown(item.name)}
+                    onClick={() => handleDropdown(item.name, item.subItems)}
                     className={`flex items-center justify-between p-2 rounded-lg cursor-pointer hover:bg-light-green-100 ${pathname.startsWith(item.href || item.name.toLowerCase()) ? "bg-light-green-100 text-green-700" : ""}`}>
                     <div className="flex items-center">
                       <item.icon className="w-5 h-5 mr-3" />
@@ -103,16 +112,6 @@ export default function Sidebar() {
                 <Link href={item.href!} className={`flex items-center p-2 rounded-lg hover:bg-light-green-100 ${pathname === item.href ? "bg-light-green-100 text-green-700 font-semibold" : ""}`}>
                   <item.icon className="w-5 h-5 mr-3" />
                   <span>{item.name}</span>
-                </Link>
-              )}
-            </li>
-          ))}
-        </ul>
-      </nav>
-    </aside>
-  );
-}
->
                 </Link>
               )}
             </li>
