@@ -23,7 +23,7 @@ export default function Home() {
       </a>
 
       <header className="w-full py-8 bg-transparent">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div className="container mx-auto px-4 py-4 sm:px-6 sm:py-6 lg:px-8 lg:py-8 text-center">
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-green-500 to-cyan-500 mb-4">
             Nolex SMS for J.H.S and Primary Schools
           </h1>
