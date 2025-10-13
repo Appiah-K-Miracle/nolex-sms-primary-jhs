@@ -41,11 +41,9 @@ export default function ClassesAndSubjectsPage() {
     <div>
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-3xl font-bold text-gray-800">Classes & Subjects</h1>
-        <Link href="/headmaster/academics/classes/new-class">
-          <a className="bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 transition-colors flex items-center">
-            <Plus className="w-5 h-5 mr-2" />
-            Add New Class
-          </a>
+        <Link href="/headmaster/academics/classes/new-class" className="bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 transition-colors flex items-center">
+          <Plus className="w-5 h-5 mr-2" />
+          Add New Class
         </Link>
       </div>
 
@@ -80,11 +78,9 @@ export default function ClassesAndSubjectsPage() {
 
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-3xl font-bold text-gray-800">Subjects</h1>
-        <Link href="/headmaster/academics/classes/new-subject">
-          <a className="bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 transition-colors flex items-center">
-            <Plus className="w-5 h-5 mr-2" />
-            Add New Subject
-          </a>
+        <Link href="/headmaster/academics/classes/new-subject" className="bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 transition-colors flex items-center">
+          <Plus className="w-5 h-5 mr-2" />
+          Add New Subject
         </Link>
       </div>
 
