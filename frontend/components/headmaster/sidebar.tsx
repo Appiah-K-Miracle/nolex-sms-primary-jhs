@@ -56,8 +56,15 @@ export default function Sidebar() {
   const pathname = usePathname();
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
 
-  const handleDropdown = (name: string) => {
-    setOpenDropdown(openDropdown === name ? null : name);
+  const handleDropdown = (name: string, subItems: any) => {
+    if (openDropdown === name) {
+      setOpenDropdown(null);
+    } else {
+      setOpenDropdown(name);
+      if (subItems && subItems.length > 0) {
+        router.push(subItems[0].href);
+      }
+    }
   };
 
   return (
@@ -96,6 +103,16 @@ export default function Sidebar() {
                 <Link href={item.href!} className={`flex items-center p-2 rounded-lg hover:bg-light-green-100 ${pathname === item.href ? "bg-light-green-100 text-green-700 font-semibold" : ""}`}>
                   <item.icon className="w-5 h-5 mr-3" />
                   <span>{item.name}</span>
+                </Link>
+              )}
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </aside>
+  );
+}
+>
                 </Link>
               )}
             </li>
