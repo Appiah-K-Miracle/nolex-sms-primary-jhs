@@ -1,10 +1,10 @@
 "use client"
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useParams } from "next/navigation";
 import { 
   ArrowLeft, 
   Save, 
-  Plus, 
   BookOpen, 
   User,
   Hash,
@@ -16,11 +16,56 @@ import {
   Award,
   Brain,
   Settings,
-  Palette
+  Palette,
+  Trash2,
+  AlertCircle
 } from "lucide-react";
 import Link from "next/link";
 
-export default function NewSubjectPage() {
+const subjects = [
+  { 
+    id: 1, 
+    name: "Mathematics", 
+    code: "MATH101", 
+    teacher: "Mr. John Doe - Mathematics",
+    credits: "5",
+    difficulty: "Medium",
+    category: "Core Subject",
+    description: "Comprehensive mathematics covering algebra, geometry, and basic statistics for primary level students.",
+    prerequisites: "Basic Arithmetic",
+    duration: "60",
+    assessmentType: "Continuous Assessment",
+    color: "#10b981",
+    classes: 6,
+    teachers: 3,
+    hours: 5
+  },
+  { 
+    id: 2, 
+    name: "English Language", 
+    code: "ENG101", 
+    teacher: "Ms. Jane Smith - English",
+    credits: "5",
+    difficulty: "Medium",
+    category: "Core Subject",
+    description: "English language development focusing on reading, writing, speaking, and listening skills.",
+    prerequisites: "Basic Literacy",
+    duration: "45",
+    assessmentType: "Mixed Assessment",
+    color: "#3b82f6",
+    classes: 6,
+    teachers: 2,
+    hours: 5
+  }
+];
+
+export default function EditSubjectPage() {
+  const params = useParams();
+  const { id } = params;
+
+  const subjectId = typeof id === 'string' ? parseInt(id, 10) : NaN;
+  const subjectData = subjects.find((s) => s.id === subjectId);
+
   const [formData, setFormData] = useState({
     subjectName: "",
     subjectCode: "",
@@ -37,6 +82,25 @@ export default function NewSubjectPage() {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+
+  useEffect(() => {
+    if (subjectData) {
+      setFormData({
+        subjectName: subjectData.name,
+        subjectCode: subjectData.code,
+        teacher: subjectData.teacher,
+        credits: subjectData.credits,
+        difficulty: subjectData.difficulty,
+        category: subjectData.category,
+        description: subjectData.description,
+        prerequisites: subjectData.prerequisites,
+        duration: subjectData.duration,
+        assessmentType: subjectData.assessmentType,
+        color: subjectData.color
+      });
+    }
+  }, [subjectData]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -52,29 +116,39 @@ export default function NewSubjectPage() {
     
     // Simulate API call
     setTimeout(() => {
-      console.log("New Subject:", formData);
+      console.log("Updated Subject:", formData);
       setIsSubmitting(false);
       setShowSuccess(true);
       
-      // Reset form after 3 seconds
+      // Hide success message after 3 seconds
       setTimeout(() => {
         setShowSuccess(false);
-        setFormData({
-          subjectName: "",
-          subjectCode: "",
-          teacher: "",
-          credits: "",
-          difficulty: "",
-          category: "",
-          description: "",
-          prerequisites: "",
-          duration: "",
-          assessmentType: "",
-          color: "#10b981"
-        });
       }, 3000);
     }, 2000);
   };
+
+  const handleDelete = () => {
+    console.log("Deleting subject:", subjectId);
+    setShowDeleteConfirm(false);
+    // Add delete logic here
+  };
+
+  if (!subjectData) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-red-50 to-red-100 flex items-center justify-center">
+        <div className="bg-white rounded-2xl shadow-2xl p-8 text-center max-w-md">
+          <div className="bg-red-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+            <BookOpen className="w-8 h-8 text-red-600" />
+          </div>
+          <h1 className="text-2xl font-bold text-gray-900 mb-2">Subject Not Found</h1>
+          <p className="text-gray-600 mb-6">The requested subject could not be found in our records.</p>
+          <Link href="/headmaster/academics/classes" className="bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-6 rounded-xl transition-colors">
+            Back to Subjects
+          </Link>
+        </div>
+      </div>
+    );
+  }
 
   const teachers = [
     "Mr. John Doe - Mathematics",
@@ -132,19 +206,28 @@ export default function NewSubjectPage() {
             <div className="flex items-center gap-2 mb-6">
               <Link href="/headmaster/academics/classes" className="flex items-center gap-2 text-blue-100 hover:text-white transition-colors group">
                 <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
-                <span>Back to Classes</span>
+                <span>Back to Subjects</span>
               </Link>
             </div>
 
             {/* Page Header */}
-            <div className="flex items-center gap-6">
-              <div className="bg-white/20 backdrop-blur-sm p-4 rounded-2xl">
-                <BookOpen className="w-8 h-8" />
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-6">
+                <div className="bg-white/20 backdrop-blur-sm p-4 rounded-2xl">
+                  <Settings className="w-8 h-8" />
+                </div>
+                <div>
+                  <h1 className="text-4xl font-bold mb-2">Edit Subject: {subjectData.name}</h1>
+                  <p className="text-xl text-blue-100">Modify subject information and settings</p>
+                </div>
               </div>
-              <div>
-                <h1 className="text-4xl font-bold mb-2">Create New Subject</h1>
-                <p className="text-xl text-blue-100">Add a new subject to your curriculum</p>
-              </div>
+              <button 
+                onClick={() => setShowDeleteConfirm(true)}
+                className="bg-red-500/80 hover:bg-red-600/80 backdrop-blur-sm text-white py-3 px-6 rounded-xl transition-all duration-300 flex items-center gap-2 shadow-lg"
+              >
+                <Trash2 className="w-5 h-5" />
+                Delete Subject
+              </button>
             </div>
           </div>
         </div>
@@ -155,8 +238,56 @@ export default function NewSubjectPage() {
         <div className="fixed top-4 right-4 z-50 bg-green-500 text-white p-6 rounded-2xl shadow-2xl flex items-center gap-3 animate-slide-in">
           <CheckCircle className="w-6 h-6" />
           <div>
-            <div className="font-semibold">Subject Created Successfully!</div>
-            <div className="text-sm text-green-100">The subject has been added to your curriculum.</div>
+            <div className="font-semibold">Subject Updated Successfully!</div>
+            <div className="text-sm text-green-100">The subject information has been updated.</div>
+          </div>
+        </div>
+      )}
+
+      {/* Delete Confirmation Modal */}
+      {showDeleteConfirm && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full transform animate-in fade-in zoom-in duration-300">
+            <div className="p-6 border-b border-gray-100">
+              <div className="flex items-center gap-3">
+                <div className="bg-red-100 p-3 rounded-full">
+                  <Trash2 className="w-6 h-6 text-red-600" />
+                </div>
+                <h2 className="text-xl font-bold text-gray-900">Delete Subject</h2>
+              </div>
+            </div>
+            <div className="p-6">
+              <p className="text-gray-600 mb-6">
+                Are you sure you want to delete <span className="font-semibold text-gray-900">"{subjectData.name}"</span>? 
+                This will permanently remove:
+              </p>
+              <ul className="text-sm text-gray-600 space-y-1 mb-6 ml-4">
+                <li>• Subject from all {subjectData.classes} classes</li>
+                <li>• All lesson plans and curriculum content</li>
+                <li>• Student grades and assessment records</li>
+                <li>• Teacher assignments and schedules</li>
+              </ul>
+              <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-6">
+                <div className="flex items-center gap-2">
+                  <AlertCircle className="w-4 h-4 text-red-600" />
+                  <span className="text-sm font-medium text-red-800">This action cannot be undone!</span>
+                </div>
+              </div>
+              <div className="flex gap-3">
+                <button 
+                  onClick={() => setShowDeleteConfirm(false)} 
+                  className="flex-1 px-4 py-3 text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-xl font-medium transition-colors"
+                >
+                  Cancel
+                </button>
+                <button 
+                  onClick={handleDelete} 
+                  className="flex-1 px-4 py-3 bg-red-500 hover:bg-red-600 text-white rounded-xl font-medium transition-colors"
+                >
+                  Delete Permanently
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       )}
@@ -173,7 +304,7 @@ export default function NewSubjectPage() {
               </div>
               <div>
                 <h2 className="text-2xl font-bold text-gray-900">Subject Information</h2>
-                <p className="text-gray-600">Configure the new subject details and settings</p>
+                <p className="text-gray-600">Update the subject details and settings</p>
               </div>
             </div>
           </div>
@@ -415,7 +546,7 @@ export default function NewSubjectPage() {
                 value={formData.description}
                 onChange={handleInputChange}
                 placeholder="Describe the subject objectives, content coverage, and learning outcomes..."
-                rows="4"
+                rows={4}
                 className="w-full px-4 py-4 border-2 border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 text-gray-900 placeholder-gray-400 resize-none"
               />
             </div>
@@ -436,12 +567,12 @@ export default function NewSubjectPage() {
                 {isSubmitting ? (
                   <>
                     <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-                    Creating...
+                    Updating...
                   </>
                 ) : (
                   <>
                     <Save className="w-5 h-5" />
-                    Create Subject
+                    Update Subject
                   </>
                 )}
               </button>
@@ -449,30 +580,33 @@ export default function NewSubjectPage() {
           </form>
         </div>
 
-        {/* Info Cards */}
+        {/* Current Stats Display */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
           <div className="bg-white rounded-xl shadow-lg p-6 border border-gray-100">
-            <div className="bg-green-100 w-12 h-12 rounded-xl flex items-center justify-center mb-4">
-              <Target className="w-6 h-6 text-green-600" />
-            </div>
-            <h3 className="font-semibold text-gray-900 mb-2">Curriculum Integration</h3>
-            <p className="text-sm text-gray-600">Subjects automatically integrate with class schedules and timetables.</p>
-          </div>
-          
-          <div className="bg-white rounded-xl shadow-lg p-6 border border-gray-100">
             <div className="bg-blue-100 w-12 h-12 rounded-xl flex items-center justify-center mb-4">
-              <Calendar className="w-6 h-6 text-blue-600" />
+              <BookOpen className="w-6 h-6 text-blue-600" />
             </div>
-            <h3 className="font-semibold text-gray-900 mb-2">Assessment Tracking</h3>
-            <p className="text-sm text-gray-600">Set up grading criteria and track student performance automatically.</p>
+            <h3 className="font-semibold text-gray-900 mb-2">Active Classes</h3>
+            <p className="text-2xl font-bold text-blue-600">{subjectData.classes}</p>
+            <p className="text-sm text-gray-600">classes using this subject</p>
           </div>
           
           <div className="bg-white rounded-xl shadow-lg p-6 border border-gray-100">
-            <div className="bg-purple-100 w-12 h-12 rounded-xl flex items-center justify-center mb-4">
-              <Brain className="w-6 h-6 text-purple-600" />
+            <div className="bg-green-100 w-12 h-12 rounded-xl flex items-center justify-center mb-4">
+              <User className="w-6 h-6 text-green-600" />
             </div>
-            <h3 className="font-semibold text-gray-900 mb-2">Smart Insights</h3>
-            <p className="text-sm text-gray-600">Get analytics on subject performance and student engagement.</p>
+            <h3 className="font-semibold text-gray-900 mb-2">Assigned Teachers</h3>
+            <p className="text-2xl font-bold text-green-600">{subjectData.teachers}</p>
+            <p className="text-sm text-gray-600">qualified instructors</p>
+          </div>
+          
+          <div className="bg-white rounded-xl shadow-lg p-6 border border-gray-100">
+            <div className="bg-orange-100 w-12 h-12 rounded-xl flex items-center justify-center mb-4">
+              <Clock className="w-6 h-6 text-orange-600" />
+            </div>
+            <h3 className="font-semibold text-gray-900 mb-2">Weekly Hours</h3>
+            <p className="text-2xl font-bold text-orange-600">{subjectData.hours}h</p>
+            <p className="text-sm text-gray-600">per week instruction</p>
           </div>
         </div>
       </div>
