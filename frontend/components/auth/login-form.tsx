@@ -149,7 +149,7 @@ export default function LoginForm() {
           </div>
         </div>
 
-        <div className="w-full max-w-sm space-y-6 px-6 mt-12 lg:mt-0">
+        <div className="w-full max-w-sm space-y-4 px-6 mt-17 lg:mt-0">
           {/* Header */}
           <div className="text-center">
             <h1 className="text-3xl font-bold text-gray-900 mb-2">Welcome Back</h1>
@@ -159,7 +159,7 @@ export default function LoginForm() {
           </div>
 
           {/* Form */}
-          <form onSubmit={handleSubmit} className="space-y-5">
+          <form onSubmit={handleSubmit} className="space-y-3">
             {/* Email Field */}
             <div className="space-y-1">
               <label htmlFor="email" className="text-sm font-medium text-gray-700">

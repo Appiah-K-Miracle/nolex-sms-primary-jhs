@@ -12,6 +12,7 @@ const sidebarItems = [
   {
     name: "Academics",
     icon: Book,
+    href: "/headmaster/academics",
     subItems: [
       { name: "Classes & Subjects", href: "/headmaster/academics/classes" },
       { name: "Timetables", href: "/headmaster/academics/timetables" },
@@ -21,6 +22,7 @@ const sidebarItems = [
   {
     name: "Students",
     icon: Users,
+    href: "/headmaster/students",
     subItems: [
       { name: "Admissions", href: "/headmaster/students/admissions" },
       { name: "Student List", href: "/headmaster/students" },
@@ -30,16 +32,28 @@ const sidebarItems = [
   {
     name: "Staff",
     icon: User,
+    href: "/headmaster/staff",
     subItems: [
       { name: "Staff List", href: "/headmaster/staff" },
       { name: "Attendance", href: "/headmaster/staff/attendance" },
       { name: "Leave Management", href: "/headmaster/staff/leave" },
     ],
   },
-  { name: "Finance", href: "/headmaster/finance", icon: DollarSign },
+  {
+    name: "Finance",
+    icon: DollarSign,
+    href: "/headmaster/finance",
+    subItems: [
+      { name: "Overview", href: "/headmaster/finance" },
+      { name: "Fee Management", href: "/headmaster/finance/fees" },
+      { name: "Expenses", href: "/headmaster/finance/expenses" },
+      { name: "Payroll", href: "/headmaster/finance/payroll" },
+    ],
+  },
   {
     name: "Reports",
     icon: File,
+    href: "/headmaster/reports",
     subItems: [
       { name: "Student Reports", href: "/headmaster/reports/student" },
       { name: "Finance Reports", href: "/headmaster/reports/finance" },
@@ -50,6 +64,7 @@ const sidebarItems = [
   {
     name: "Settings",
     icon: Settings,
+    href: "/headmaster/settings",
     subItems: [
       { name: "General", href: "/headmaster/settings/general" },
       { name: "Users & Roles", href: "/headmaster/settings/users" },
