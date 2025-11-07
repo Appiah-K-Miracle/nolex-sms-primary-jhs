@@ -149,7 +149,7 @@ export default function Home() {
             </div>
 
             {/* Main Heading with Better Typography */}
-            <h1 className="text-6xl sm:text-7xl lg:text-8xl font-black tracking-tight mb-8 leading-tight">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-black tracking-tight mb-8 leading-tight">
               <span className="block text-white drop-shadow-lg">Revolutionize</span>
               <span className="block bg-gradient-to-r from-green-300 via-cyan-300 to-blue-300 bg-clip-text text-transparent drop-shadow-lg">
                 School Excellence
@@ -158,38 +158,38 @@ export default function Home() {
 
             {/* Enhanced Subtitle */}
             <div className="max-w-4xl mx-auto mb-16">
-              <p className="text-2xl sm:text-3xl text-green-50 mb-6 leading-relaxed font-light">
+              <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-green-50 mb-6 leading-relaxed font-light">
                 Transform education with <span className="font-bold text-white">Nolex SMS</span> - 
                 the next-generation platform for Primary and J.H.S institutions
               </p>
-              <p className="text-lg text-green-200 max-w-2xl mx-auto">
+              <p className="text-base md:text-lg text-green-200 max-w-2xl mx-auto">
                 Streamline operations • Enhance communication • Boost academic performance
               </p>
             </div>
 
             {/* Premium CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-20">
-              <Link href="/login" className="group bg-gradient-to-r from-green-500 to-green-600 hover:from-green-400 hover:to-green-500 text-white font-bold py-5 px-10 rounded-2xl shadow-2xl hover:shadow-green-500/25 transition-all duration-500 transform hover:-translate-y-2 hover:scale-105 flex items-center gap-3 text-lg">
+            <div className="flex flex-col sm:flex-row gap-4 md:gap-6 justify-center items-center mb-12 md:mb-20 px-4">
+              <Link href="/login" className="group bg-gradient-to-r from-green-500 to-green-600 hover:from-green-400 hover:to-green-500 text-white font-bold py-4 md:py-5 px-8 md:px-10 rounded-xl md:rounded-2xl shadow-2xl hover:shadow-green-500/25 transition-all duration-500 transform hover:-translate-y-2 hover:scale-105 flex items-center gap-3 text-base md:text-lg w-full sm:w-auto justify-center">
                 <span>Start Free Trial</span>
-                <ArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
-                <div className="absolute inset-0 bg-gradient-to-r from-green-400 to-green-500 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity -z-10 blur"></div>
+                <ArrowRight className="w-5 h-5 md:w-6 md:h-6 group-hover:translate-x-1 transition-transform" />
+                <div className="absolute inset-0 bg-gradient-to-r from-green-400 to-green-500 rounded-xl md:rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity -z-10 blur"></div>
               </Link>
-              <button className="group bg-white/10 hover:bg-white/20 backdrop-blur-xl text-white font-semibold py-5 px-10 rounded-2xl border-2 border-white/30 hover:border-white/50 transition-all duration-500 transform hover:-translate-y-1 flex items-center gap-3 text-lg shadow-2xl">
-                <Play className="w-6 h-6 group-hover:scale-110 transition-transform" />
+              <button className="group bg-white/10 hover:bg-white/20 backdrop-blur-xl text-white font-semibold py-4 md:py-5 px-8 md:px-10 rounded-xl md:rounded-2xl border-2 border-white/30 hover:border-white/50 transition-all duration-500 transform hover:-translate-y-1 flex items-center gap-3 text-base md:text-lg shadow-2xl w-full sm:w-auto justify-center">
+                <Play className="w-5 h-5 md:w-6 md:h-6 group-hover:scale-110 transition-transform" />
                 <span>Watch Demo</span>
               </button>
             </div>
 
             {/* Enhanced Trust Indicators */}
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 max-w-5xl mx-auto">
               {stats.map((stat, index) => (
                 <div key={index} className="group">
-                  <div className="bg-white/5 backdrop-blur-xl rounded-2xl p-8 shadow-2xl hover:shadow-green-500/10 transition-all duration-500 transform hover:-translate-y-2 border border-white/10 hover:border-white/20">
-                    <div className="bg-gradient-to-br from-green-400 to-cyan-400 p-4 rounded-xl mb-6 mx-auto w-fit group-hover:scale-110 transition-transform duration-300">
-                      <stat.icon className="w-8 h-8 text-white" />
+                  <div className="bg-white/5 backdrop-blur-xl rounded-xl md:rounded-2xl p-4 md:p-8 shadow-2xl hover:shadow-green-500/10 transition-all duration-500 transform hover:-translate-y-2 border border-white/10 hover:border-white/20">
+                    <div className="bg-gradient-to-br from-green-400 to-cyan-400 p-2 md:p-4 rounded-lg md:rounded-xl mb-3 md:mb-6 mx-auto w-fit group-hover:scale-110 transition-transform duration-300">
+                      <stat.icon className="w-5 h-5 md:w-8 md:h-8 text-white" />
                     </div>
-                    <div className="text-4xl font-black text-white mb-2">{stat.number}</div>
-                    <div className="text-green-200 font-medium">{stat.label}</div>
+                    <div className="text-2xl md:text-4xl font-black text-white mb-1 md:mb-2">{stat.number}</div>
+                    <div className="text-green-200 font-medium text-xs md:text-base">{stat.label}</div>
                   </div>
                 </div>
               ))}
@@ -223,53 +223,53 @@ export default function Home() {
               <Target className="w-4 h-4" />
               Role-Based Access
             </div>
-            <h2 className="text-5xl sm:text-6xl font-black text-gray-900 mb-6 leading-tight">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-gray-900 mb-6 leading-tight">
               Choose Your
               <span className="block bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
                 Perfect Dashboard
               </span>
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
               Experience tailored interfaces designed specifically for your role. 
               Each dashboard provides the exact tools and insights you need to excel.
             </p>
           </div>
 
           {/* Premium Dashboard Cards Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 max-w-6xl mx-auto px-4 sm:px-0">
             {cardData.map((card, index) => (
               <div key={index} className="group relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-blue-500 rounded-3xl opacity-0 group-hover:opacity-10 transition-opacity duration-500 transform scale-105"></div>
-                <div className="relative bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 border border-gray-100 hover:border-green-200 overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-blue-500 rounded-2xl md:rounded-3xl opacity-0 group-hover:opacity-10 transition-opacity duration-500 transform scale-105"></div>
+                <div className="relative bg-white rounded-2xl md:rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 border border-gray-100 hover:border-green-200 overflow-hidden">
                   {/* Card Header with Gradient */}
-                  <div className={`p-8 bg-gradient-to-br ${
+                  <div className={`p-6 md:p-8 bg-gradient-to-br ${
                     index === 0 ? 'from-green-500 to-green-600' :
                     index === 1 ? 'from-cyan-500 to-cyan-600' :
                     index === 2 ? 'from-yellow-500 to-orange-500' :
                     'from-purple-500 to-purple-600'
                   } text-white relative overflow-hidden`}>
-                    <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-16 translate-x-16"></div>
+                    <div className="absolute top-0 right-0 w-24 h-24 md:w-32 md:h-32 bg-white/10 rounded-full -translate-y-12 md:-translate-y-16 translate-x-12 md:translate-x-16"></div>
                     <div className="relative z-10">
-                      <div className="bg-white/20 backdrop-blur-sm p-4 rounded-2xl w-fit mb-6 group-hover:scale-110 transition-transform duration-300">
+                      <div className="bg-white/20 backdrop-blur-sm p-3 md:p-4 rounded-xl md:rounded-2xl w-fit mb-4 md:mb-6 group-hover:scale-110 transition-transform duration-300">
                         {icons[card.icon]}
                       </div>
-                      <h3 className="text-2xl font-bold mb-3">{card.title}</h3>
-                      <p className="text-white/90 leading-relaxed">{card.description}</p>
+                      <h3 className="text-xl md:text-2xl font-bold mb-2 md:mb-3">{card.title}</h3>
+                      <p className="text-white/90 leading-relaxed text-sm md:text-base">{card.description}</p>
                     </div>
                   </div>
 
                   {/* Card Body */}
-                  <div className="p-8">
-                    <div className="mb-8">
-                      <h4 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
-                        <CheckCircle className="w-5 h-5 text-green-500" />
+                  <div className="p-6 md:p-8">
+                    <div className="mb-6 md:mb-8">
+                      <h4 className="text-base md:text-lg font-semibold text-gray-900 mb-3 md:mb-4 flex items-center gap-2">
+                        <CheckCircle className="w-4 h-4 md:w-5 md:h-5 text-green-500" />
                         Key Features
                       </h4>
-                      <ul className="space-y-3">
+                      <ul className="space-y-2 md:space-y-3">
                         {card.tasks.map((task, taskIndex) => (
                           <li key={taskIndex} className="flex items-center gap-3">
-                            <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                            <span className="text-gray-700">{task}</span>
+                            <div className="w-2 h-2 bg-green-500 rounded-full flex-shrink-0"></div>
+                            <span className="text-gray-700 text-sm md:text-base">{task}</span>
                           </li>
                         ))}
                       </ul>
@@ -283,10 +283,10 @@ export default function Home() {
                         index === 1 ? 'from-cyan-500 to-cyan-600 hover:from-cyan-600 hover:to-cyan-700' :
                         index === 2 ? 'from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600' :
                         'from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700'
-                      } text-white font-bold py-4 px-6 rounded-xl transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-3 shadow-lg hover:shadow-xl`}
+                      } text-white font-bold py-3 md:py-4 px-4 md:px-6 rounded-lg md:rounded-xl transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-3 shadow-lg hover:shadow-xl text-sm md:text-base`}
                     >
                       <span>Access Dashboard</span>
-                      <ArrowRight className="w-5 h-5 group-hover/cta:translate-x-1 transition-transform" />
+                      <ArrowRight className="w-4 h-4 md:w-5 md:h-5 group-hover/cta:translate-x-1 transition-transform" />
                     </Link>
                   </div>
                 </div>

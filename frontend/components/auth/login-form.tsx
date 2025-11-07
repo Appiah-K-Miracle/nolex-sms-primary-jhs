@@ -138,28 +138,28 @@ export default function LoginForm() {
       </div>
 
       {/* Right Pane - Enhanced */}
-      <div className="w-full lg:w-1/2 flex items-center justify-center bg-gradient-to-br from-gray-50 to-white relative">
+      <div className="w-full lg:w-1/2 flex items-center justify-center bg-gradient-to-br from-gray-50 to-white relative min-h-screen lg:min-h-0">
         {/* Mobile Logo */}
-        <div className="lg:hidden absolute top-6 left-1/2 transform -translate-x-1/2">
+        <div className="lg:hidden absolute top-4 sm:top-6 left-1/2 transform -translate-x-1/2">
           <div className="flex items-center gap-2">
             <div className="bg-green-100 p-2 rounded-full">
-              <School className="w-6 h-6 text-green-600" />
+              <School className="w-5 h-5 sm:w-6 sm:h-6 text-green-600" />
             </div>
-            <h1 className="text-xl font-bold text-green-700">Nolex SMS</h1>
+            <h1 className="text-lg sm:text-xl font-bold text-green-700">Nolex SMS</h1>
           </div>
         </div>
 
-        <div className="w-full max-w-sm space-y-4 px-6 mt-17 lg:mt-0">
+        <div className="w-full max-w-sm space-y-4 px-4 sm:px-6 mt-20 sm:mt-16 lg:mt-0 py-8 lg:py-0">
           {/* Header */}
           <div className="text-center">
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">Welcome Back</h1>
-            <p className="text-gray-600">
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Welcome Back</h1>
+            <p className="text-gray-600 text-sm sm:text-base">
               Sign in to access your dashboard
             </p>
           </div>
 
           {/* Form */}
-          <form onSubmit={handleSubmit} className="space-y-3">
+          <form onSubmit={handleSubmit} className="space-y-4">
             {/* Email Field */}
             <div className="space-y-1">
               <label htmlFor="email" className="text-sm font-medium text-gray-700">

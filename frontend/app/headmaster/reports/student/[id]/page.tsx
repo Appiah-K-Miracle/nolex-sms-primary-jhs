@@ -166,6 +166,242 @@ export default function StudentReportDetailPage({ params }: { params: { id: stri
           description: "Consider engaging weekend programs to improve Monday motivation"
         }
       ]
+    },
+    "2": {
+      id: 2,
+      title: "Attendance Analysis - October 2025",
+      type: "Attendance",
+      description: "Monthly attendance tracking and analysis for all students",
+      generatedDate: "2025-10-31",
+      generatedBy: "Mary Johnson",
+      status: "completed",
+      fileSize: "1.8 MB",
+      downloadCount: 32,
+      lastDownloaded: "2025-11-03",
+      
+      studentCount: 450,
+      averageAttendance: 94.2,
+      perfectAttendance: 67,
+      chronicAbsent: 12,
+      tardyCount: 89,
+      
+      // Daily attendance breakdown
+      dailyAttendance: [
+        { day: "Monday", rate: 92.1, present: 414, absent: 36 },
+        { day: "Tuesday", rate: 95.3, present: 429, absent: 21 },
+        { day: "Wednesday", rate: 94.8, present: 427, absent: 23 },
+        { day: "Thursday", rate: 95.1, present: 428, absent: 22 },
+        { day: "Friday", rate: 91.5, present: 412, absent: 38 }
+      ],
+      
+      // Grade breakdown
+      gradeBreakdown: [
+        { grade: "Grade 1", students: 75, attendance: 95.8, perfectCount: 15 },
+        { grade: "Grade 2", students: 78, attendance: 94.9, perfectCount: 12 },
+        { grade: "Grade 3", students: 72, attendance: 93.8, perfectCount: 11 },
+        { grade: "Grade 4", students: 68, attendance: 94.1, perfectCount: 10 },
+        { grade: "Grade 5", students: 75, attendance: 93.5, perfectCount: 9 },
+        { grade: "Grade 6", students: 82, attendance: 94.7, perfectCount: 10 }
+      ],
+      
+      // Chronic absentees
+      chronicAbsentees: [
+        { id: "STU156", name: "Samuel Tetteh", grade: "Grade 3", absences: 15, rate: 76.2 },
+        { id: "STU234", name: "Linda Adjei", grade: "Grade 5", absences: 12, rate: 81.0 },
+        { id: "STU345", name: "Peter Owusu", grade: "Grade 2", absences: 11, rate: 82.4 }
+      ],
+      
+      insights: [
+        {
+          type: "positive",
+          title: "Strong Overall Attendance",
+          description: "94.2% average attendance rate meets school standards"
+        },
+        {
+          type: "concern",
+          title: "Monday-Friday Pattern",
+          description: "Lower attendance on Mondays and Fridays suggests weekend effect"
+        },
+        {
+          type: "recommendation",
+          title: "Intervention Programs",
+          description: "Implement targeted support for 12 chronically absent students"
+        }
+      ]
+    },
+    "3": {
+      id: 3,
+      title: "Behavioral Assessment Report",
+      type: "Behavior",
+      description: "Student behavior tracking and disciplinary action summary",
+      generatedDate: "2025-10-28",
+      generatedBy: "Robert Davis",
+      status: "completed",
+      fileSize: "3.1 MB",
+      downloadCount: 23,
+      lastDownloaded: "2025-11-01",
+      
+      studentCount: 450,
+      incidents: 24,
+      resolved: 20,
+      pending: 4,
+      commendations: 156,
+      
+      // Incident categories
+      incidentTypes: [
+        { type: "Disruption", count: 8, percentage: 33.3, resolved: 7 },
+        { type: "Disrespect", count: 6, percentage: 25.0, resolved: 5 },
+        { type: "Fighting", count: 4, percentage: 16.7, resolved: 3 },
+        { type: "Tardiness", count: 3, percentage: 12.5, resolved: 3 },
+        { type: "Other", count: 3, percentage: 12.5, resolved: 2 }
+      ],
+      
+      // Grade breakdown
+      behaviorByGrade: [
+        { grade: "Grade 1", incidents: 2, commendations: 35, ratio: 17.5 },
+        { grade: "Grade 2", incidents: 3, commendations: 28, ratio: 9.3 },
+        { grade: "Grade 3", incidents: 5, commendations: 25, ratio: 5.0 },
+        { grade: "Grade 4", incidents: 6, commendations: 22, ratio: 3.7 },
+        { grade: "Grade 5", incidents: 4, commendations: 24, ratio: 6.0 },
+        { grade: "Grade 6", incidents: 4, commendations: 22, ratio: 5.5 }
+      ],
+      
+      // Top behavioral students
+      exemplaryStudents: [
+        { id: "STU067", name: "Grace Asante", grade: "Grade 6", commendations: 8 },
+        { id: "STU023", name: "Aisha Osei", grade: "Grade 5", commendations: 7 },
+        { id: "STU089", name: "David Mensah", grade: "Grade 4", commendations: 6 }
+      ],
+      
+      insights: [
+        {
+          type: "positive",
+          title: "High Commendation Rate",
+          description: "156 commendations vs 24 incidents shows positive school culture"
+        },
+        {
+          type: "concern",
+          title: "Pending Incidents",
+          description: "4 unresolved incidents require immediate attention"
+        },
+        {
+          type: "recommendation",
+          title: "Preventive Programs",
+          description: "Focus on conflict resolution training for middle grades"
+        }
+      ]
+    },
+    "4": {
+      id: 4,
+      title: "Class Progress Report - Grade 4A",
+      type: "Class Progress",
+      description: "Detailed progress tracking for Grade 4A students",
+      generatedDate: "2025-10-25",
+      generatedBy: "Susan Wilson",
+      status: "completed",
+      fileSize: "1.5 MB",
+      downloadCount: 18,
+      lastDownloaded: "2025-10-29",
+      
+      studentCount: 25,
+      classAverage: 81.2,
+      subjectCount: 8,
+      improvement: 5.8,
+      topPerformers: 6,
+      needsAttention: 2,
+      
+      // Subject performance
+      subjects: [
+        { name: "Mathematics", average: 84.2, improvement: 6.5, topScore: 96 },
+        { name: "English", average: 82.8, improvement: 4.8, topScore: 94 },
+        { name: "Science", average: 79.5, improvement: 7.2, topScore: 92 },
+        { name: "Social Studies", average: 83.1, improvement: 5.1, topScore: 95 },
+        { name: "French", average: 76.4, improvement: 8.3, topScore: 89 },
+        { name: "ICT", average: 87.9, improvement: 3.2, topScore: 98 },
+        { name: "Creative Arts", average: 89.6, improvement: 2.8, topScore: 100 },
+        { name: "PE", average: 91.2, improvement: 1.5, topScore: 100 }
+      ],
+      
+      // Student progress
+      studentProgress: [
+        { name: "Top Achievers", count: 6, averageImprovement: 8.2 },
+        { name: "Steady Progress", count: 15, averageImprovement: 5.1 },
+        { name: "Needs Support", count: 4, averageImprovement: 2.3 }
+      ],
+      
+      insights: [
+        {
+          type: "positive",
+          title: "Excellent Class Progress",
+          description: "5.8% improvement in class average shows effective teaching"
+        },
+        {
+          type: "positive",
+          title: "French Language Growth",
+          description: "8.3% improvement in French indicates successful language program"
+        },
+        {
+          type: "recommendation",
+          title: "Individual Support",
+          description: "Provide targeted assistance for 2 students requiring attention"
+        }
+      ]
+    },
+    "5": {
+      id: 5,
+      title: "Parent Engagement Report",
+      type: "Parent Engagement",
+      description: "Analysis of parent participation in school activities and communication",
+      generatedDate: "2025-10-22",
+      generatedBy: "Patricia Moore",
+      status: "completed",
+      fileSize: "2.9 MB",
+      downloadCount: 41,
+      lastDownloaded: "2025-11-04",
+      
+      studentCount: 450,
+      parentCount: 380,
+      engagementRate: 84.4,
+      meetingAttendance: 76.8,
+      volunteerHours: 245,
+      communicationScore: 88.5,
+      
+      // Engagement categories
+      engagementTypes: [
+        { type: "Parent-Teacher Meetings", participation: 76.8, count: 292 },
+        { type: "School Events", participation: 68.9, count: 262 },
+        { type: "Volunteer Activities", participation: 45.3, count: 172 },
+        { type: "Home-School Communication", participation: 91.2, count: 347 },
+        { type: "Academic Support", participation: 82.1, count: 312 }
+      ],
+      
+      // Grade level engagement
+      gradeEngagement: [
+        { grade: "Grade 1", rate: 89.3, meetings: 85.2, volunteers: 52.1 },
+        { grade: "Grade 2", rate: 87.8, meetings: 82.1, volunteers: 48.3 },
+        { grade: "Grade 3", rate: 85.1, meetings: 78.9, volunteers: 46.2 },
+        { grade: "Grade 4", rate: 83.2, meetings: 75.6, volunteers: 43.8 },
+        { grade: "Grade 5", rate: 81.7, meetings: 73.4, volunteers: 41.5 },
+        { grade: "Grade 6", rate: 79.4, meetings: 70.8, volunteers: 39.7 }
+      ],
+      
+      insights: [
+        {
+          type: "positive",
+          title: "Strong Communication",
+          description: "91.2% participation in home-school communication shows excellent engagement"
+        },
+        {
+          type: "concern",
+          title: "Declining Engagement",
+          description: "Parent engagement decreases from 89.3% in Grade 1 to 79.4% in Grade 6"
+        },
+        {
+          type: "recommendation",
+          title: "Upper Grade Focus",
+          description: "Develop targeted engagement strategies for upper primary grades"
+        }
+      ]
     }
   };
 

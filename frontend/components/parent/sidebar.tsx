@@ -4,99 +4,138 @@ import { useState, useEffect } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import { 
-  LayoutDashboard, Book, Users, User, DollarSign, Megaphone, ChevronDown, ChevronUp, Settings, File, X, GraduationCap 
+  LayoutDashboard, 
+  User, 
+  BookOpen, 
+  Calendar, 
+  MessageSquare, 
+  DollarSign, 
+  Bell, 
+  Settings, 
+  ChevronDown, 
+  ChevronUp, 
+  X,
+  Menu,
+  GraduationCap,
+  ClipboardList,
+  FileText,
+  Users,
+  Clock,
+  AlertCircle,
+  CheckCircle,
+  Star,
+  TrendingUp
 } from "lucide-react";
 
 const sidebarItems = [
   { 
     name: "Dashboard", 
-    href: "/headmaster", 
+    href: "/parent", 
     icon: LayoutDashboard,
-    description: "Overview and analytics"
+    description: "Overview and quick actions"
+  },
+  {
+    name: "My Children",
+    icon: Users,
+    href: "/parent/children",
+    description: "Manage your children's profiles",
+    subItems: [
+      { name: "All Children", href: "/parent/children" },
+      { name: "Academic Progress", href: "/parent/children/academic" },
+      { name: "Attendance", href: "/parent/children/attendance" },
+      { name: "Behavior Reports", href: "/parent/children/behavior" },
+    ],
   },
   {
     name: "Academics",
-    icon: Book,
-    href: "/headmaster/academics",
-    description: "Classes, subjects & exams",
+    icon: BookOpen,
+    href: "/parent/academics",
+    description: "Academic performance and reports",
     subItems: [
-      { name: "Classes & Subjects", href: "/headmaster/academics/classes" },
-      { name: "Timetables", href: "/headmaster/academics/timetables" },
-      { name: "Examinations", href: "/headmaster/academics/exams" },
+      { name: "Grades & Results", href: "/parent/academics/grades" },
+      { name: "Assignments", href: "/parent/academics/assignments" },
+      { name: "Timetable", href: "/parent/academics/timetable" },
+      { name: "Subjects", href: "/parent/academics/subjects" },
     ],
   },
   {
-    name: "Students",
-    icon: Users,
-    href: "/headmaster/students",
-    description: "Student management",
+    name: "Attendance",
+    icon: Clock,
+    href: "/parent/attendance",
+    description: "Daily attendance records",
     subItems: [
-      { name: "Admissions", href: "/headmaster/students/admissions" },
-      { name: "Student List", href: "/headmaster/students" },
-      { name: "Attendance", href: "/headmaster/students/attendance" },
+      { name: "Daily Records", href: "/parent/attendance/daily" },
+      { name: "Monthly Summary", href: "/parent/attendance/monthly" },
+      { name: "Leave Requests", href: "/parent/attendance/leave" },
     ],
   },
   {
-    name: "Staff",
-    icon: User,
-    href: "/headmaster/staff",
-    description: "Staff management",
+    name: "Communication",
+    icon: MessageSquare,
+    href: "/parent/communication",
+    description: "Messages and announcements",
     subItems: [
-      { name: "Staff List", href: "/headmaster/staff" },
-      { name: "Attendance", href: "/headmaster/staff/attendance" },
-      { name: "Leave Management", href: "/headmaster/staff/leave" },
+      { name: "Messages", href: "/parent/communication/messages" },
+      { name: "Announcements", href: "/parent/communication/announcements" },
+      { name: "Teacher Meetings", href: "/parent/communication/meetings" },
+      { name: "Parent Groups", href: "/parent/communication/groups" },
     ],
   },
   {
     name: "Finance",
     icon: DollarSign,
-    href: "/headmaster/finance",
-    description: "Financial management",
+    href: "/parent/finance",
+    description: "Fees and payments",
     subItems: [
-      { name: "Overview", href: "/headmaster/finance" },
-      { name: "Fee Management", href: "/headmaster/finance/fees" },
-      { name: "Expenses", href: "/headmaster/finance/expenses" },
-      { name: "Payroll", href: "/headmaster/finance/payroll" },
+      { name: "Fee Structure", href: "/parent/finance/fees" },
+      { name: "Payment History", href: "/parent/finance/payments" },
+      { name: "Outstanding Bills", href: "/parent/finance/outstanding" },
+      { name: "Receipts", href: "/parent/finance/receipts" },
+    ],
+  },
+  {
+    name: "Events & Calendar",
+    icon: Calendar,
+    href: "/parent/events",
+    description: "School events and calendar",
+    subItems: [
+      { name: "School Calendar", href: "/parent/events/calendar" },
+      { name: "Upcoming Events", href: "/parent/events/upcoming" },
+      { name: "Parent Meetings", href: "/parent/events/meetings" },
+      { name: "Holidays", href: "/parent/events/holidays" },
     ],
   },
   {
     name: "Reports",
-    icon: File,
-    href: "/headmaster/reports",
-    description: "Analytics & reports",
+    icon: FileText,
+    href: "/parent/reports",
+    description: "Academic and progress reports",
     subItems: [
-      { name: "Student Reports", href: "/headmaster/reports/student" },
-      { name: "Finance Reports", href: "/headmaster/reports/finance" },
-      { name: "Staff Reports", href: "/headmaster/reports/staff" },
+      { name: "Term Reports", href: "/parent/reports/term" },
+      { name: "Progress Reports", href: "/parent/reports/progress" },
+      { name: "Assessment Reports", href: "/parent/reports/assessments" },
     ],
   },
   { 
-    name: "Communication", 
-    href: "/headmaster/communication", 
-    icon: Megaphone,
-    description: "Messages & announcements"
+    name: "Notifications", 
+    href: "/parent/notifications", 
+    icon: Bell,
+    description: "Alerts and notifications"
   },
-  {
-    name: "Settings",
+  { 
+    name: "Settings", 
+    href: "/parent/settings", 
     icon: Settings,
-    href: "/headmaster/settings",
-    description: "System configuration",
-    subItems: [
-      { name: "General", href: "/headmaster/settings/general" },
-      { name: "Users & Roles", href: "/headmaster/settings/users" },
-      { name: "School Profile", href: "/headmaster/settings/profile" },
-      { name: "Notifications", href: "/headmaster/settings/notifications" },
-      
-    ],
+    description: "Account and preferences"
   },
 ];
 
-interface SidebarProps {
+interface ParentSidebarProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-export default function Sidebar({ isOpen, onClose }: SidebarProps) {
+export default function ParentSidebar({ isOpen, onClose }: ParentSidebarProps) {
   const pathname = usePathname();
   const router = useRouter();
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
@@ -167,52 +206,52 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
       {/* Sidebar */}
       <aside className={`
         fixed lg:static inset-y-0 left-0 z-50 w-72 lg:w-64 xl:w-72
-        bg-gradient-to-b from-green-900 via-green-800 to-green-900 
-        text-white border-r border-green-700
+        bg-gradient-to-b from-blue-900 via-blue-800 to-blue-900 
+        text-white border-r border-blue-700
         transform transition-transform duration-300 ease-in-out lg:transform-none
         ${isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
         flex flex-col h-screen overflow-hidden
       `}>
         {/* Header */}
-        <div className="flex items-center justify-between p-4 lg:p-6 border-b border-green-700 bg-green-800/50">
+        <div className="flex items-center justify-between p-4 lg:p-6 border-b border-blue-700 bg-blue-800/50">
           <div className="flex items-center space-x-3">
-            <div className="w-8 h-8 lg:w-10 lg:h-10 bg-gradient-to-br from-green-400 to-green-600 rounded-lg flex items-center justify-center">
+            <div className="w-8 h-8 lg:w-10 lg:h-10 bg-gradient-to-br from-blue-400 to-blue-600 rounded-lg flex items-center justify-center">
               <GraduationCap className="w-5 h-5 lg:w-6 lg:h-6 text-white" />
             </div>
             <div>
               <h1 className="text-lg lg:text-xl font-bold text-white">Nolex SMS</h1>
-              <p className="text-xs lg:text-sm text-green-200">Admin Portal</p>
+              <p className="text-xs lg:text-sm text-blue-200">Parent Portal</p>
             </div>
           </div>
           
           {/* Close button for mobile */}
           <button 
             onClick={onClose}
-            className="lg:hidden p-2 rounded-lg hover:bg-green-700/50 transition-colors"
+            className="lg:hidden p-2 rounded-lg hover:bg-blue-700/50 transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
-        {/* Admin Info */}
-        <div className="p-4 lg:p-6 bg-green-800/30 border-b border-green-700">
+        {/* User Info */}
+        <div className="p-4 lg:p-6 bg-blue-800/30 border-b border-blue-700">
           <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 lg:w-12 lg:h-12 bg-gradient-to-br from-yellow-400 to-green-500 rounded-full flex items-center justify-center">
-              <span className="text-sm lg:text-base font-semibold text-white">HM</span>
+            <div className="w-10 h-10 lg:w-12 lg:h-12 bg-gradient-to-br from-green-400 to-blue-500 rounded-full flex items-center justify-center">
+              <span className="text-sm lg:text-base font-semibold text-white">MK</span>
             </div>
             <div className="min-w-0 flex-1">
               <p className="text-sm lg:text-base font-semibold text-white truncate">
-                Mr. Joseph Asante
+                Mrs. Akosua Mensah
               </p>
-              <p className="text-xs lg:text-sm text-green-200 truncate">
-                Headmaster • Administrator
+              <p className="text-xs lg:text-sm text-blue-200 truncate">
+                Parent • 2 Children
               </p>
             </div>
           </div>
         </div>
 
         {/* Navigation */}
-        <nav className="flex-1 p-3 lg:p-4 overflow-y-auto scrollbar-thin scrollbar-thumb-green-600 scrollbar-track-green-800">
+        <nav className="flex-1 p-3 lg:p-4 overflow-y-auto scrollbar-thin scrollbar-thumb-blue-600 scrollbar-track-blue-800">
           <ul className="space-y-1 lg:space-y-2">
             {sidebarItems.map((item) => (
               <li key={item.name}>
@@ -222,15 +261,15 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
                       onClick={() => handleDropdown(item.name, item.subItems)}
                       className={`flex items-center justify-between p-3 lg:p-4 rounded-xl cursor-pointer transition-all duration-200 group ${
                         pathname.startsWith(item.href || item.name.toLowerCase()) 
-                          ? "bg-green-600/60 text-white shadow-lg" 
-                          : "text-green-100 hover:bg-green-700/40 hover:text-white"
+                          ? "bg-blue-600/60 text-white shadow-lg" 
+                          : "text-blue-100 hover:bg-blue-700/40 hover:text-white"
                       }`}
                     >
                       <div className="flex items-center space-x-3 min-w-0 flex-1">
                         <div className={`p-2 rounded-lg transition-colors ${
                           pathname.startsWith(item.href || item.name.toLowerCase()) 
-                            ? "bg-green-500/50" 
-                            : "bg-green-800/50 group-hover:bg-green-600/50"
+                            ? "bg-blue-500/50" 
+                            : "bg-blue-800/50 group-hover:bg-blue-600/50"
                         }`}>
                           <item.icon className="w-4 h-4 lg:w-5 lg:h-5 flex-shrink-0" />
                         </div>
@@ -238,7 +277,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
                           <span className="text-sm lg:text-base font-medium block truncate">
                             {item.name}
                           </span>
-                          <span className="text-xs text-green-200 block truncate lg:hidden xl:block">
+                          <span className="text-xs text-blue-200 block truncate lg:hidden xl:block">
                             {item.description}
                           </span>
                         </div>
@@ -252,15 +291,15 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
                     </div>
                     
                     {openDropdown === item.name && (
-                      <ul className="mt-2 ml-4 lg:ml-6 space-y-1 border-l-2 border-green-600/30 pl-4">
+                      <ul className="mt-2 ml-4 lg:ml-6 space-y-1 border-l-2 border-blue-600/30 pl-4">
                         {item.subItems.map((subItem) => (
                           <li key={subItem.name}>
                             <Link 
                               href={subItem.href} 
                               className={`block p-2 lg:p-3 rounded-lg text-sm lg:text-base transition-all duration-200 ${
                                 pathname === subItem.href 
-                                  ? "bg-green-500/50 text-white font-semibold shadow-md" 
-                                  : "text-green-200 hover:bg-green-700/30 hover:text-white"
+                                  ? "bg-blue-500/50 text-white font-semibold shadow-md" 
+                                  : "text-blue-200 hover:bg-blue-700/30 hover:text-white"
                               }`}
                             >
                               <span className="truncate block">{subItem.name}</span>
@@ -275,14 +314,14 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
                     href={item.href!} 
                     className={`flex items-center p-3 lg:p-4 rounded-xl transition-all duration-200 group ${
                       pathname === item.href 
-                        ? "bg-green-600/60 text-white shadow-lg" 
-                        : "text-green-100 hover:bg-green-700/40 hover:text-white"
+                        ? "bg-blue-600/60 text-white shadow-lg" 
+                        : "text-blue-100 hover:bg-blue-700/40 hover:text-white"
                     }`}
                   >
                     <div className={`p-2 rounded-lg transition-colors ${
                       pathname === item.href 
-                        ? "bg-green-500/50" 
-                        : "bg-green-800/50 group-hover:bg-green-600/50"
+                        ? "bg-blue-500/50" 
+                        : "bg-blue-800/50 group-hover:bg-blue-600/50"
                     }`}>
                       <item.icon className="w-4 h-4 lg:w-5 lg:h-5 flex-shrink-0" />
                     </div>
@@ -290,7 +329,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
                       <span className="text-sm lg:text-base font-medium block truncate">
                         {item.name}
                       </span>
-                      <span className="text-xs text-green-200 block truncate lg:hidden xl:block">
+                      <span className="text-xs text-blue-200 block truncate lg:hidden xl:block">
                         {item.description}
                       </span>
                     </div>
@@ -302,14 +341,14 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
         </nav>
 
         {/* Footer */}
-        <div className="p-4 lg:p-6 border-t border-green-700 bg-green-800/30">
+        <div className="p-4 lg:p-6 border-t border-blue-700 bg-blue-800/30">
           <div className="text-center">
             <div className="flex items-center justify-center space-x-2 mb-2">
               <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-              <span className="text-xs lg:text-sm text-green-200">System Online</span>
+              <span className="text-xs lg:text-sm text-blue-200">System Online</span>
             </div>
-            <p className="text-xs text-green-300">© 2025 Nolex SMS</p>
-            <p className="text-xs text-green-400">Admin Portal v2.1.0</p>
+            <p className="text-xs text-blue-300">© 2025 Nolex SMS</p>
+            <p className="text-xs text-blue-400">Parent Portal v1.0</p>
           </div>
         </div>
       </aside>

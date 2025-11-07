@@ -32,41 +32,41 @@ export default function StaffReportDetailPage({ params }: { params: { id: string
   const [reportDetail, setReportDetail] = useState<any>(null);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
-  // Sample detailed report data based on ID
+  // Sample detailed report data based on ID - MATCHING MAIN PAGE DATA
   const reportDatabase = {
     "1": {
       id: 1,
-      title: "Staff Performance Evaluation - Q3 2025",
-      type: "Performance Review",
-      description: "Comprehensive evaluation of staff performance across all departments for Q3 2025",
-      generatedDate: "2025-11-01",
+      title: "Q3 Performance Review - 2025",
+      type: "Performance Report",
+      description: "Comprehensive performance analysis of all teaching and non-teaching staff for Q3 2025",
+      generatedDate: "2025-10-15",
       generatedBy: "HR Manager",
       status: "completed",
-      fileSize: "3.8 MB",
-      downloadCount: 42,
+      fileSize: "2.4 MB",
+      downloadCount: 28,
       lastDownloaded: "2025-11-02",
       
       // Performance Specific Data
       staffCount: 48,
       averageRating: 4.2,
-      excellentPerformers: 15,
-      needsImprovement: 6,
+      excellentPerformers: 18,
+      needsImprovement: 2,
       
       // Department breakdown
       departments: [
-        { name: "Academic", staff: 28, avgRating: 4.4, excellent: 9, needsWork: 2 },
-        { name: "Administration", staff: 12, avgRating: 4.1, excellent: 4, needsWork: 1 },
-        { name: "Support Services", staff: 8, avgRating: 3.9, excellent: 2, needsWork: 3 }
+        { name: "Teaching Staff", staff: 28, avgRating: 4.3, excellent: 12, needsWork: 0 },
+        { name: "Administrative", staff: 12, avgRating: 4.1, excellent: 4, needsWork: 1 },
+        { name: "Support Staff", staff: 8, avgRating: 4.0, excellent: 2, needsWork: 1 }
       ],
       
       // Performance metrics
       performanceMetrics: {
-        punctuality: 92.5,
-        productivity: 87.3,
-        teamwork: 89.1,
-        professionalism: 91.8,
-        communication: 88.7,
-        initiative: 85.4
+        punctuality: 96.3,
+        productivity: 88.5,
+        teamwork: 91.2,
+        professionalism: 93.8,
+        communication: 89.4,
+        initiative: 86.7
       },
       
       // Top performers
@@ -168,6 +168,280 @@ export default function StaffReportDetailPage({ params }: { params: { id: string
           type: "recommendation",
           title: "Technology Integration Training",
           description: "Provide professional development in digital teaching tools and methodologies"
+        }
+      ]
+    },
+    "2": {
+      id: 2,
+      title: "Teaching Assessment Report - November 2025",
+      type: "Teaching Assessment",
+      description: "Detailed assessment of teaching effectiveness and student feedback analysis",
+      generatedDate: "2025-11-01",
+      generatedBy: "Academic Director",
+      status: "completed",
+      fileSize: "1.9 MB",
+      downloadCount: 22,
+      lastDownloaded: "2025-11-03",
+      
+      staffCount: 28,
+      averageRating: 4.4,
+      excellentPerformers: 15,
+      needsImprovement: 0,
+      
+      departments: [
+        { name: "Mathematics", staff: 6, avgRating: 4.6, excellent: 4, needsWork: 0 },
+        { name: "Science", staff: 7, avgRating: 4.5, excellent: 4, needsWork: 0 },
+        { name: "Languages", staff: 8, avgRating: 4.3, excellent: 4, needsWork: 0 },
+        { name: "Social Studies", staff: 4, avgRating: 4.2, excellent: 2, needsWork: 0 },
+        { name: "Arts & PE", staff: 3, avgRating: 4.1, excellent: 1, needsWork: 0 }
+      ],
+      
+      performanceMetrics: {
+        punctuality: 97.2,
+        productivity: 91.5,
+        teamwork: 93.8,
+        professionalism: 95.1,
+        communication: 92.4,
+        initiative: 89.6
+      },
+      
+      topPerformers: [
+        { id: "STF101", name: "Dr. Kwame Asante", department: "Mathematics", role: "Senior Teacher", rating: 4.9, strengths: ["Mathematical Excellence", "Student Results"] },
+        { id: "STF102", name: "Mrs. Akosua Mensah", department: "Science", role: "Chemistry Teacher", rating: 4.8, strengths: ["Laboratory Skills", "Innovation"] },
+        { id: "STF103", name: "Mr. Joseph Osei", department: "English", role: "English Teacher", rating: 4.7, strengths: ["Communication", "Curriculum"] }
+      ],
+      
+      improvementNeeded: [],
+      
+      teachingMetrics: {
+        lessonPlanning: 92.5,
+        curriculum: 89.2,
+        assessment: 91.3,
+        classManagement: 93.7,
+        innovation: 87.8
+      },
+      
+      insights: [
+        {
+          type: "positive",
+          title: "Exceptional Teaching Quality",
+          description: "4.4 average rating shows high teaching effectiveness with all departments performing excellently"
+        },
+        {
+          type: "positive",
+          title: "Zero Improvement Cases",
+          description: "No staff requiring improvement indicates strong teaching standards across the board"
+        },
+        {
+          type: "recommendation",
+          title: "Innovation Enhancement",
+          description: "Continue building on the 87.8% innovation score to modernize teaching approaches"
+        }
+      ]
+    },
+    "3": {
+      id: 3,
+      title: "Staff Attendance Analysis - Q3 2025",
+      type: "Attendance Report",
+      description: "Comprehensive analysis of staff attendance patterns and leave management",
+      generatedDate: "2025-10-20",
+      generatedBy: "HR Assistant",
+      status: "completed",
+      fileSize: "1.6 MB",
+      downloadCount: 15,
+      lastDownloaded: "2025-10-28",
+      
+      staffCount: 48,
+      averageRating: 94.8,
+      excellentPerformers: 42,
+      needsImprovement: 1,
+      
+      departments: [
+        { name: "Teaching Staff", staff: 28, avgRating: 95.2, excellent: 26, needsWork: 0 },
+        { name: "Administrative", staff: 12, avgRating: 94.8, excellent: 11, needsWork: 1 },
+        { name: "Support Staff", staff: 8, avgRating: 93.5, excellent: 5, needsWork: 0 }
+      ],
+      
+      performanceMetrics: {
+        punctuality: 96.5,
+        productivity: 94.8,
+        teamwork: 95.1,
+        professionalism: 96.2,
+        communication: 93.7,
+        initiative: 92.4
+      },
+      
+      topPerformers: [
+        { id: "STF201", name: "Perfect Attendance Group", department: "Various", role: "Multiple", rating: 100.0, strengths: ["Consistency", "Reliability"] },
+        { id: "STF202", name: "Teaching Excellence Team", department: "Academic", role: "Teachers", rating: 98.5, strengths: ["Dedication", "Punctuality"] },
+        { id: "STF203", name: "Administrative Leaders", department: "Admin", role: "Staff", rating: 97.2, strengths: ["Commitment", "Leadership"] }
+      ],
+      
+      improvementNeeded: [
+        { id: "STF256", name: "John Mensah", department: "Support Staff", role: "Maintenance", rating: 3.2, areas: ["Punctuality", "Attendance Consistency"] }
+      ],
+      
+      attendanceMetrics: {
+        overallAttendance: 94.8,
+        punctualityRate: 96.5,
+        sickLeaveUsage: 3.2,
+        casualLeaveUsage: 5.8,
+        lateArrivals: 3.5
+      },
+      
+      insights: [
+        {
+          type: "positive",
+          title: "Outstanding Attendance Culture",
+          description: "94.8% attendance rate with most staff achieving excellent attendance records"
+        },
+        {
+          type: "positive",
+          title: "Minimal Issues",
+          description: "Only 1 staff member needs improvement showing strong commitment across the board"
+        },
+        {
+          type: "recommendation",
+          title: "Wellness Support",
+          description: "Continue supporting staff wellness to maintain the excellent attendance rates"
+        }
+      ]
+    },
+    "4": {
+      id: 4,
+      title: "Training Progress Report - Q3 2025",
+      type: "Training Report",
+      description: "Assessment of staff training programs and professional development progress",
+      generatedDate: "2025-10-12",
+      generatedBy: "Training Coordinator",
+      status: "completed",
+      fileSize: "2.2 MB",
+      downloadCount: 19,
+      lastDownloaded: "2025-10-30",
+      
+      staffCount: 48,
+      averageRating: 4.1,
+      excellentPerformers: 35,
+      needsImprovement: 4,
+      
+      departments: [
+        { name: "Teaching Staff", staff: 28, avgRating: 4.3, excellent: 22, needsWork: 1 },
+        { name: "Administrative", staff: 12, avgRating: 4.0, excellent: 8, needsWork: 2 },
+        { name: "Support Staff", staff: 8, avgRating: 3.8, excellent: 5, needsWork: 1 }
+      ],
+      
+      performanceMetrics: {
+        punctuality: 91.5,
+        productivity: 87.8,
+        teamwork: 89.2,
+        professionalism: 92.1,
+        communication: 88.6,
+        initiative: 85.3
+      },
+      
+      topPerformers: [
+        { id: "STF301", name: "Training Champions", department: "Various", role: "Multiple", rating: 4.8, strengths: ["Learning Agility", "Knowledge Transfer"] },
+        { id: "STF302", name: "Digital Leaders", department: "Academic", role: "Teachers", rating: 4.6, strengths: ["Technology Skills", "Innovation"] },
+        { id: "STF303", name: "Mentorship Group", department: "Admin", role: "Senior Staff", rating: 4.5, strengths: ["Leadership", "Guidance"] }
+      ],
+      
+      improvementNeeded: [
+        { id: "STF356", name: "Technology Learners", department: "Various", role: "Multiple", rating: 3.4, areas: ["Digital Skills", "Adaptation"] },
+        { id: "STF367", name: "Professional Development", department: "Support", role: "Staff", rating: 3.6, areas: ["Skill Enhancement", "Certification"] }
+      ],
+      
+      trainingMetrics: {
+        completionRate: 78.5,
+        satisfactionScore: 87.2,
+        knowledgeRetention: 82.8,
+        skillApplication: 79.4,
+        certificationRate: 71.6
+      },
+      
+      insights: [
+        {
+          type: "positive",
+          title: "Strong Training Engagement",
+          description: "78.5% completion rate shows good staff engagement in professional development"
+        },
+        {
+          type: "concern",
+          title: "Skill Application Gap",
+          description: "79.4% skill application rate indicates need for better practical implementation"
+        },
+        {
+          type: "recommendation",
+          title: "Practical Training Focus",
+          description: "Enhance hands-on training components to improve skill application"
+        }
+      ]
+    },
+    "5": {
+      id: 5,
+      title: "Productivity Analysis Report - Q3 2025",
+      type: "Productivity Report",
+      description: "Comprehensive analysis of staff productivity and efficiency metrics",
+      generatedDate: "2025-10-08",
+      generatedBy: "Operations Manager",
+      status: "completed",
+      fileSize: "2.7 MB",
+      downloadCount: 16,
+      lastDownloaded: "2025-10-25",
+      
+      staffCount: 48,
+      averageRating: 4.0,
+      excellentPerformers: 28,
+      needsImprovement: 8,
+      
+      departments: [
+        { name: "Teaching Staff", staff: 28, avgRating: 4.2, excellent: 18, needsWork: 3 },
+        { name: "Administrative", staff: 12, avgRating: 3.9, excellent: 6, needsWork: 3 },
+        { name: "Support Staff", staff: 8, avgRating: 3.7, excellent: 4, needsWork: 2 }
+      ],
+      
+      performanceMetrics: {
+        punctuality: 89.2,
+        productivity: 85.4,
+        teamwork: 87.8,
+        professionalism: 90.5,
+        communication: 86.1,
+        initiative: 82.7
+      },
+      
+      topPerformers: [
+        { id: "STF401", name: "High Achievers", department: "Academic", role: "Teachers", rating: 4.7, strengths: ["Efficiency", "Results"] },
+        { id: "STF402", name: "Admin Excellence", department: "Administration", role: "Managers", rating: 4.5, strengths: ["Organization", "Delivery"] },
+        { id: "STF403", name: "Support Heroes", department: "Support", role: "Staff", rating: 4.3, strengths: ["Reliability", "Quality"] }
+      ],
+      
+      improvementNeeded: [
+        { id: "STF456", name: "Efficiency Group", department: "Various", role: "Multiple", rating: 3.2, areas: ["Time Management", "Output Quality"] },
+        { id: "STF467", name: "Process Improvement", department: "Admin", role: "Staff", rating: 3.4, areas: ["Workflow", "Standards"] }
+      ],
+      
+      productivityMetrics: {
+        taskCompletion: 85.4,
+        qualityScore: 82.7,
+        timeManagement: 79.3,
+        resourceUtilization: 88.1,
+        goalAchievement: 81.5
+      },
+      
+      insights: [
+        {
+          type: "positive",
+          title: "Good Overall Productivity",
+          description: "85.4% task completion rate shows strong overall productivity across departments"
+        },
+        {
+          type: "concern",
+          title: "Time Management Issues",
+          description: "79.3% time management score indicates opportunities for efficiency improvement"
+        },
+        {
+          type: "recommendation",
+          title: "Efficiency Training",
+          description: "Implement time management and efficiency training programs"
         }
       ]
     }
