@@ -123,8 +123,8 @@ export default function GeneralSettingsPage() {
 
   const currencies = [
     "GHS - Ghana Cedis",
-    "NGN - Nigerian Naira",
-    "KES - Kenyan Shilling", 
+    "NGN - Nigerian Naira", 
+    "KES - Kenyan Shilling",
     "ZAR - South African Rand",
     "USD - US Dollar",
     "EUR - Euro"

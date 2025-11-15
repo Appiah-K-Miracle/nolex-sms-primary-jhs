@@ -136,8 +136,7 @@ export default function StaffReportEditPage({ params }: { params: { id: string }
       performanceLevels: ["Excellent", "Good"],
       generatedDate: "2025-10-08",
       generatedBy: "Operations Manager",
-      fileSize: "2.7 MB"
-    }
+      fileSize: "2.7 MB",
       status: "completed",
       dateFrom: "2025-10-01",
       dateTo: "2025-10-31",

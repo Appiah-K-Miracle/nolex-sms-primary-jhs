@@ -21,20 +21,37 @@ import {
   Activity
 } from "lucide-react";
 import Link from "next/link";
+import { useState, useEffect } from "react";
 
 export default function HeadmasterPage() {
-  const currentTime = new Date().toLocaleTimeString('en-US', { 
-    hour: '2-digit', 
-    minute: '2-digit',
-    hour12: true 
-  });
+  const [currentTime, setCurrentTime] = useState('');
+  const [currentDate, setCurrentDate] = useState('');
   
-  const currentDate = new Date().toLocaleDateString('en-US', { 
-    weekday: 'long',
-    year: 'numeric', 
-    month: 'long', 
-    day: 'numeric' 
-  });
+  useEffect(() => {
+    const updateDateTime = () => {
+      const now = new Date();
+      setCurrentTime(now.toLocaleTimeString('en-US', { 
+        hour: '2-digit', 
+        minute: '2-digit',
+        hour12: true 
+      }));
+      
+      setCurrentDate(now.toLocaleDateString('en-US', { 
+        weekday: 'long',
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric' 
+      }));
+    };
+
+    // Set initial values
+    updateDateTime();
+    
+    // Update every minute
+    const interval = setInterval(updateDateTime, 60000);
+    
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-cyan-50">
@@ -49,11 +66,11 @@ export default function HeadmasterPage() {
               <div className="flex items-center gap-4 mt-3 text-green-100">
                 <div className="flex items-center gap-2">
                   <Calendar className="w-4 h-4" />
-                  <span className="text-sm">{currentDate}</span>
+                  <span className="text-sm">{currentDate || 'Loading...'}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Clock className="w-4 h-4" />
-                  <span className="text-sm">{currentTime}</span>
+                  <span className="text-sm">{currentTime || 'Loading...'}</span>
                 </div>
               </div>
             </div>

@@ -1081,28 +1081,7 @@ Nolex Primary & JHS`,
               </div>
             </div>
 
-            {/* Views by Date */}
-            {announcementDetail.viewsByDate.length > 0 && (
-              <div>
-                <h3 className="font-medium text-gray-900 mb-4">Views by Date</h3>
-                <div className="space-y-3">
-                  {announcementDetail.viewsByDate.map((dayView: any, index: number) => (
-                    <div key={index} className="flex items-center justify-between">
-                      <span className="text-gray-600">{dayView.date}</span>
-                      <div className="flex items-center gap-3">
-                        <div className="w-32 bg-gray-200 rounded-full h-2">
-                          <div 
-                            className="bg-blue-600 h-2 rounded-full"
-                            style={{ width: `${(dayView.views / announcementDetail.views) * 100}%` }}
-                          ></div>
-                        </div>
-                        <span className="font-medium text-gray-900 w-8">{dayView.views}</span>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
+
           </div>
         </div>
 
@@ -1164,17 +1143,75 @@ Nolex Primary & JHS`,
             </div>
           </div>
 
-          {/* Audience Breakdown */}
+          {/* Target Audience Details */}
           <div className="bg-white rounded-xl shadow-lg p-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">Audience Breakdown</h3>
-            <div className="space-y-3">
-              {Object.entries(announcementDetail.audienceBreakdown).map(([key, value]: [string, any]) => (
-                <div key={key} className="flex justify-between items-center">
-                  <span className="text-gray-600 capitalize">{key}</span>
-                  <span className="font-medium text-gray-900">{value}</span>
-                </div>
-              ))}
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">Target Audience</h3>
+            <div className="mb-4">
+              <div className="flex items-center gap-2 mb-2">
+                <Globe className="w-5 h-5 text-blue-600" />
+                <span className="font-medium text-gray-900">{announcementDetail.audience}</span>
+              </div>
+              <p className="text-sm text-gray-600">Total Recipients: {announcementDetail.totalRecipients}</p>
             </div>
+            
+            <div className="border-t pt-4">
+              <h4 className="text-sm font-medium text-gray-900 mb-3">Audience Breakdown</h4>
+              <div className="space-y-3">
+                {Object.entries(announcementDetail.audienceBreakdown).map(([key, value]: [string, any]) => (
+                  <div key={key} className="flex justify-between items-center">
+                    <div className="flex items-center gap-2">
+                      <div className="w-3 h-3 bg-blue-600 rounded-full"></div>
+                      <span className="text-gray-600 capitalize">{key}</span>
+                    </div>
+                    <span className="font-medium text-gray-900">{value}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* View Analytics */}
+          <div className="bg-white rounded-xl shadow-lg p-6">
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">View Analytics</h3>
+            <div className="mb-4">
+              <div className="flex items-center justify-between mb-2">
+                <div className="flex items-center gap-2">
+                  <Eye className="w-5 h-5 text-green-600" />
+                  <span className="font-medium text-gray-900">Total Views</span>
+                </div>
+                <span className="text-2xl font-bold text-green-600">{announcementDetail.views}</span>
+              </div>
+              <div className="flex items-center justify-between text-sm">
+                <span className="text-gray-600">Read Rate</span>
+                <span className="font-medium text-gray-900">
+                  {announcementDetail.totalRecipients > 0 
+                    ? Math.round((announcementDetail.readRecipients / announcementDetail.totalRecipients) * 100)
+                    : 0}%
+                </span>
+              </div>
+            </div>
+
+            {announcementDetail.viewsByDate.length > 0 && (
+              <div className="border-t pt-4">
+                <h4 className="text-sm font-medium text-gray-900 mb-3">Daily Views</h4>
+                <div className="space-y-3">
+                  {announcementDetail.viewsByDate.map((dayView: any, index: number) => (
+                    <div key={index} className="flex items-center justify-between">
+                      <span className="text-gray-600 text-sm">{dayView.date}</span>
+                      <div className="flex items-center gap-3">
+                        <div className="w-24 bg-gray-200 rounded-full h-2">
+                          <div 
+                            className="bg-green-600 h-2 rounded-full"
+                            style={{ width: `${(dayView.views / announcementDetail.views) * 100}%` }}
+                          ></div>
+                        </div>
+                        <span className="font-medium text-gray-900 w-8 text-sm">{dayView.views}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Related Announcements */}
