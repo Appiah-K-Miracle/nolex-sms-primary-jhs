@@ -2,27 +2,27 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { 
-  ArrowLeft, 
-  Save, 
-  Settings, 
-  School, 
-  Calendar, 
-  Clock, 
-  Globe, 
+import {
+  ArrowLeft,
+  Save,
+  Settings,
+  School,
+  Calendar,
+  Clock,
+  Globe,
   Database,
   RefreshCw,
   CheckCircle,
   AlertTriangle,
   Info,
   MapPin,
-  Building
+  Building,
 } from "lucide-react";
 
-export default function GeneralSettingsPage() {
-  const [saving, setSaving] = useState(false);
-  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
-  
+export default function GeneralSettingsPage(): JSX.Element {
+  const [saving, setSaving] = useState<boolean>(false);
+  const [showSuccessMessage, setShowSuccessMessage] = useState<boolean>(false);
+
   const [formData, setFormData] = useState({
     // School Basic Information
     schoolName: "Nolex Primary & JHS",
@@ -129,17 +129,13 @@ export default function GeneralSettingsPage() {
     "USD - US Dollar",
     "EUR - Euro"
   ];
-
   return (
     <div className="p-6">
       {/* Header */}
       <div className="bg-gradient-to-r from-blue-600 to-blue-700 rounded-lg shadow-lg p-6 mb-6">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <Link 
-              href="/headmaster/settings"
-              className="text-white hover:text-blue-100 transition-colors"
-            >
+            <Link href="/headmaster/settings" className="text-white hover:text-blue-100 transition-colors">
               <ArrowLeft className="w-6 h-6" />
             </Link>
             <div>
@@ -147,6 +143,7 @@ export default function GeneralSettingsPage() {
               <p className="text-blue-100">Configure basic school information and system preferences</p>
             </div>
           </div>
+
           <button
             onClick={handleSave}
             disabled={saving}
@@ -168,7 +165,7 @@ export default function GeneralSettingsPage() {
         </div>
       )}
 
-      {/* System Status Cards - Moved to Top */}
+      {/* System Status Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
         <div className="bg-white rounded-xl shadow-lg p-6">
           <div className="flex items-center justify-between">
@@ -217,7 +214,7 @@ export default function GeneralSettingsPage() {
           </div>
           <div className="mt-4">
             <div className="w-full bg-gray-200 rounded-full h-2">
-              <div className="bg-orange-500 h-2 rounded-full" style={{ width: '68%' }}></div>
+              <div className="bg-orange-500 h-2 rounded-full" style={{ width: '68%' }} />
             </div>
           </div>
         </div>
@@ -232,12 +229,10 @@ export default function GeneralSettingsPage() {
               <School className="w-5 h-5 text-blue-600" />
               School Information
             </h2>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  School Name
-                </label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">School Name</label>
                 <input
                   type="text"
                   value={formData.schoolName}
@@ -245,11 +240,9 @@ export default function GeneralSettingsPage() {
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
               </div>
-              
+
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  School Code
-                </label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">School Code</label>
                 <input
                   type="text"
                   value={formData.schoolCode}
@@ -257,11 +250,9 @@ export default function GeneralSettingsPage() {
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
               </div>
-              
+
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Established Year
-                </label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Established Year</label>
                 <input
                   type="text"
                   value={formData.establishedYear}
@@ -269,11 +260,9 @@ export default function GeneralSettingsPage() {
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
               </div>
-              
+
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  School Type
-                </label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">School Type</label>
                 <select
                   value={formData.schoolType}
                   onChange={(e) => handleInputChange('schoolType', e.target.value)}
@@ -285,11 +274,9 @@ export default function GeneralSettingsPage() {
                   <option value="Senior High School">Senior High School</option>
                 </select>
               </div>
-              
+
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Ownership
-                </label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Ownership</label>
                 <select
                   value={formData.ownership}
                   onChange={(e) => handleInputChange('ownership', e.target.value)}
@@ -310,12 +297,10 @@ export default function GeneralSettingsPage() {
               <Calendar className="w-5 h-5 text-blue-600" />
               Academic Year Settings
             </h2>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Current Academic Year
-                </label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Current Academic Year</label>
                 <input
                   type="text"
                   value={formData.currentAcademicYear}
@@ -323,11 +308,9 @@ export default function GeneralSettingsPage() {
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
               </div>
-              
+
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Academic Year Start
-                </label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Academic Year Start</label>
                 <input
                   type="date"
                   value={formData.academicYearStart}
@@ -335,11 +318,9 @@ export default function GeneralSettingsPage() {
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
               </div>
-              
+
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Academic Year End
-                </label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Academic Year End</label>
                 <input
                   type="date"
                   value={formData.academicYearEnd}
@@ -353,9 +334,7 @@ export default function GeneralSettingsPage() {
             <div className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Term 1 Start
-                  </label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Term 1 Start</label>
                   <input
                     type="date"
                     value={formData.term1Start}
@@ -364,9 +343,7 @@ export default function GeneralSettingsPage() {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Term 1 End
-                  </label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Term 1 End</label>
                   <input
                     type="date"
                     value={formData.term1End}
@@ -375,12 +352,10 @@ export default function GeneralSettingsPage() {
                   />
                 </div>
               </div>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Term 2 Start
-                  </label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Term 2 Start</label>
                   <input
                     type="date"
                     value={formData.term2Start}
@@ -389,9 +364,7 @@ export default function GeneralSettingsPage() {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Term 2 End
-                  </label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Term 2 End</label>
                   <input
                     type="date"
                     value={formData.term2End}
@@ -400,12 +373,10 @@ export default function GeneralSettingsPage() {
                   />
                 </div>
               </div>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Term 3 Start
-                  </label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Term 3 Start</label>
                   <input
                     type="date"
                     value={formData.term3Start}
@@ -414,9 +385,7 @@ export default function GeneralSettingsPage() {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Term 3 End
-                  </label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Term 3 End</label>
                   <input
                     type="date"
                     value={formData.term3End}
@@ -434,57 +403,55 @@ export default function GeneralSettingsPage() {
               <Globe className="w-5 h-5 text-blue-600" />
               Regional Settings
             </h2>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Timezone
-                </label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Timezone</label>
                 <select
                   value={formData.timezone}
                   onChange={(e) => handleInputChange('timezone', e.target.value)}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 >
-                  {timezones.map(tz => (
-                    <option key={tz} value={tz}>{tz}</option>
+                  {timezones.map((tz) => (
+                    <option key={tz} value={tz}>
+                      {tz}
+                    </option>
                   ))}
                 </select>
               </div>
-              
+
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Country
-                </label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Country</label>
                 <select
                   value={formData.country}
                   onChange={(e) => handleInputChange('country', e.target.value)}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 >
-                  {countries.map(country => (
-                    <option key={country} value={country}>{country}</option>
+                  {countries.map((country) => (
+                    <option key={country} value={country}>
+                      {country}
+                    </option>
                   ))}
                 </select>
               </div>
-              
+
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Currency
-                </label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Currency</label>
                 <select
                   value={formData.currency}
                   onChange={(e) => handleInputChange('currency', e.target.value)}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 >
-                  {currencies.map(currency => (
-                    <option key={currency} value={currency.split(' - ')[0]}>{currency}</option>
+                  {currencies.map((currency) => (
+                    <option key={currency} value={currency.split(" - ")[0]}>
+                      {currency}
+                    </option>
                   ))}
                 </select>
               </div>
-              
+
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Language
-                </label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Language</label>
                 <select
                   value={formData.language}
                   onChange={(e) => handleInputChange('language', e.target.value)}
@@ -496,11 +463,9 @@ export default function GeneralSettingsPage() {
                   <option value="Portuguese">Portuguese</option>
                 </select>
               </div>
-              
+
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Date Format
-                </label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Date Format</label>
                 <select
                   value={formData.dateFormat}
                   onChange={(e) => handleInputChange('dateFormat', e.target.value)}
@@ -511,11 +476,9 @@ export default function GeneralSettingsPage() {
                   <option value="YYYY-MM-DD">YYYY-MM-DD</option>
                 </select>
               </div>
-              
+
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Time Format
-                </label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Time Format</label>
                 <select
                   value={formData.timeFormat}
                   onChange={(e) => handleInputChange('timeFormat', e.target.value)}
@@ -534,13 +497,11 @@ export default function GeneralSettingsPage() {
               <Building className="w-5 h-5 text-blue-600" />
               Contact Information
             </h2>
-            
+
             <div className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Primary Email
-                  </label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Primary Email</label>
                   <input
                     type="email"
                     value={formData.primaryEmail}
@@ -548,11 +509,9 @@ export default function GeneralSettingsPage() {
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 </div>
-                
+
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Secondary Email
-                  </label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Secondary Email</label>
                   <input
                     type="email"
                     value={formData.secondaryEmail}
@@ -560,11 +519,9 @@ export default function GeneralSettingsPage() {
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 </div>
-                
+
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Primary Phone
-                  </label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Primary Phone</label>
                   <input
                     type="tel"
                     value={formData.primaryPhone}
@@ -572,11 +529,9 @@ export default function GeneralSettingsPage() {
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 </div>
-                
+
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Secondary Phone
-                  </label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Secondary Phone</label>
                   <input
                     type="tel"
                     value={formData.secondaryPhone}
@@ -585,11 +540,9 @@ export default function GeneralSettingsPage() {
                   />
                 </div>
               </div>
-              
+
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Website
-                </label>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Website</label>
                 <input
                   type="url"
                   value={formData.website}
@@ -597,12 +550,10 @@ export default function GeneralSettingsPage() {
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
               </div>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Street Address
-                  </label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Street Address</label>
                   <input
                     type="text"
                     value={formData.streetAddress}
@@ -610,11 +561,9 @@ export default function GeneralSettingsPage() {
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 </div>
-                
+
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    City
-                  </label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">City</label>
                   <input
                     type="text"
                     value={formData.city}
@@ -622,11 +571,9 @@ export default function GeneralSettingsPage() {
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 </div>
-                
+
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Region
-                  </label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Region</label>
                   <input
                     type="text"
                     value={formData.region}
@@ -634,11 +581,9 @@ export default function GeneralSettingsPage() {
                     className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   />
                 </div>
-                
+
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Postal Code
-                  </label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Postal Code</label>
                   <input
                     type="text"
                     value={formData.postalCode}
@@ -651,128 +596,8 @@ export default function GeneralSettingsPage() {
           </div>
         </div>
 
-          {/* System Preferences - Moved to main content */}
-          <div className="bg-white rounded-xl shadow-lg p-6">
-            <h2 className="text-xl font-semibold text-gray-900 mb-6 flex items-center gap-2">
-              <Settings className="w-5 h-5 text-blue-600" />
-              System Preferences
-            </h2>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Session Timeout (minutes)
-                </label>
-                <input
-                  type="number"
-                  value={formData.sessionTimeout}
-                  onChange={(e) => handleInputChange('sessionTimeout', e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                />
-              </div>
-              
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Max Students per Class
-                </label>
-                <input
-                  type="number"
-                  value={formData.maxStudentsPerClass}
-                  onChange={(e) => handleInputChange('maxStudentsPerClass', e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                />
-              </div>
-              
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Grade Passing Mark (%)
-                </label>
-                <input
-                  type="number"
-                  value={formData.gradePassingMark}
-                  onChange={(e) => handleInputChange('gradePassingMark', e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                />
-              </div>
-              
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Backup Frequency
-                </label>
-                <select
-                  value={formData.backupFrequency}
-                  onChange={(e) => handleInputChange('backupFrequency', e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                >
-                  <option value="hourly">Hourly</option>
-                  <option value="daily">Daily</option>
-                  <option value="weekly">Weekly</option>
-                  <option value="monthly">Monthly</option>
-                </select>
-              </div>
-            </div>
-
-            <h3 className="text-lg font-semibold text-gray-900 mb-4 mt-8">System Controls</h3>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <label className="flex items-center gap-3">
-                <input
-                  type="checkbox"
-                  checked={formData.autoBackup}
-                  onChange={(e) => handleInputChange('autoBackup', e.target.checked)}
-                  className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-                />
-                <div>
-                  <span className="font-medium text-gray-900">Auto Backup</span>
-                  <p className="text-sm text-gray-600">Automatically backup system data</p>
-                </div>
-              </label>
-              
-              <label className="flex items-center gap-3">
-                <input
-                  type="checkbox"
-                  checked={formData.allowRegistration}
-                  onChange={(e) => handleInputChange('allowRegistration', e.target.checked)}
-                  className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-                />
-                <div>
-                  <span className="font-medium text-gray-900">Allow Registration</span>
-                  <p className="text-sm text-gray-600">Allow new user registrations</p>
-                </div>
-              </label>
-              
-              <label className="flex items-center gap-3">
-                <input
-                  type="checkbox"
-                  checked={formData.requireEmailVerification}
-                  onChange={(e) => handleInputChange('requireEmailVerification', e.target.checked)}
-                  className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
-                />
-                <div>
-                  <span className="font-medium text-gray-900">Email Verification</span>
-                  <p className="text-sm text-gray-600">Require email verification for new accounts</p>
-                </div>
-              </label>
-              
-              <label className="flex items-center gap-3">
-                <input
-                  type="checkbox"
-                  checked={formData.maintenanceMode}
-                  onChange={(e) => handleInputChange('maintenanceMode', e.target.checked)}
-                  className="rounded border-gray-300 text-red-600 focus:ring-red-500"
-                />
-                <div>
-                  <span className="font-medium text-gray-900">Maintenance Mode</span>
-                  <p className="text-sm text-gray-600">Put system in maintenance mode</p>
-                </div>
-              </label>
-            </div>
-          </div>
-        </div>
-
-        {/* Sidebar */}
+        {/* System Preferences - Sidebar */}
         <div className="space-y-6">
-          {/* Quick Actions */}
           <div className="bg-white rounded-xl shadow-lg p-6">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">Quick Actions</h3>
             <div className="space-y-3">
@@ -791,7 +616,6 @@ export default function GeneralSettingsPage() {
             </div>
           </div>
 
-          {/* System Information */}
           <div className="bg-white rounded-xl shadow-lg p-6">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">System Information</h3>
             <div className="space-y-3 text-sm">
@@ -814,16 +638,12 @@ export default function GeneralSettingsPage() {
             </div>
           </div>
 
-          {/* Quick Info */}
           <div className="bg-blue-50 rounded-xl p-6">
             <div className="flex items-start gap-3">
               <Info className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
               <div>
                 <h3 className="font-medium text-blue-900 mb-2">Settings Help</h3>
-                <p className="text-sm text-blue-700">
-                  These settings control the basic operation of your school management system. 
-                  Changes will affect all users and should be made carefully.
-                </p>
+                <p className="text-sm text-blue-700">These settings control the basic operation of your school management system. Changes will affect all users and should be made carefully.</p>
               </div>
             </div>
           </div>
