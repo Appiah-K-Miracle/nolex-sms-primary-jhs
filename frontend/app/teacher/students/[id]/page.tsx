@@ -3,6 +3,9 @@
 import { useMemo } from "react";
 import Link from "next/link";
 import SummaryCards from "../../../../components/teacher/summary-cards";
+import BarChart from "../../../../components/charts/bar-chart";
+import LineChart from "../../../../components/charts/line-chart";
+import PieChart from "../../../../components/charts/pie-chart";
 
 type Student = {
   id: string;
@@ -63,12 +66,31 @@ export default function StudentProfilePage({ params }: { params: { id: string } 
 
           <div className="mt-6">
             <h3 className="font-semibold mb-2">Academic Summary</h3>
-            <div className="w-full h-36 bg-gray-50 rounded flex items-center justify-center text-gray-400">Grades / performance charts placeholder</div>
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+              <div className="lg:col-span-2 bg-gray-50 rounded p-2">
+                {/* Bar chart: scores by subject */}
+                <BarChart data={academicData()} />
+              </div>
+              <div className="bg-gray-50 rounded p-2 flex items-center justify-center">
+                {/* Pie: grade distribution */}
+                <PieChart data={gradeDistribution()} size={140} />
+              </div>
+            </div>
           </div>
 
           <div className="mt-6">
             <h3 className="font-semibold mb-2">Attendance Summary</h3>
-            <div className="w-full h-28 bg-gray-50 rounded flex items-center justify-center text-gray-400">Attendance chart placeholder</div>
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 items-center">
+              <div className="lg:col-span-2 bg-gray-50 rounded p-2">
+                {/* Line chart: attendance percent over months */}
+                <LineChart data={attendanceTrend()} />
+              </div>
+              <div className="bg-gray-50 rounded p-2 text-center">
+                {/* Pie: Present vs Absent */}
+                <PieChart data={presentAbsentData()} size={140} />
+                <div className="text-sm text-gray-600 mt-2">Present vs Absent</div>
+              </div>
+            </div>
           </div>
 
           <div className="mt-6">
@@ -111,4 +133,46 @@ export default function StudentProfilePage({ params }: { params: { id: string } 
       </div>
     </div>
   );
+}
+
+function academicData() {
+  const subjects = [
+    { label: 'Math', value: 88 },
+    { label: 'English', value: 76 },
+    { label: 'Science', value: 92 },
+    { label: 'History', value: 70 },
+    { label: 'ICT', value: 85 },
+  ];
+  return subjects;
+}
+
+function gradeDistribution() {
+  const scores = academicData().map(s => s.value);
+  const buckets = {
+    A: scores.filter(s => s >= 90).length,
+    B: scores.filter(s => s >= 80 && s < 90).length,
+    C: scores.filter(s => s >= 70 && s < 80).length,
+    D: scores.filter(s => s >= 60 && s < 70).length,
+    F: scores.filter(s => s < 60).length,
+  };
+  return [
+    { label: 'A', value: buckets.A },
+    { label: 'B', value: buckets.B },
+    { label: 'C', value: buckets.C },
+    { label: 'D', value: buckets.D },
+    { label: 'F', value: buckets.F },
+  ];
+}
+
+function attendanceTrend() {
+  // monthly attendance percent for last 6 months (mock)
+  return [95, 96, 93, 94, 92, 95];
+}
+
+function presentAbsentData() {
+  // mock present vs absent counts
+  return [
+    { label: 'Present', value: 150, color: '#34d399' },
+    { label: 'Absent', value: 10, color: '#f87171' },
+  ];
 }

@@ -1,13 +1,31 @@
 
 "use client";
 
-import { Search, Bell, User, ChevronDown, Menu } from "lucide-react";
+import { Search, Bell, ChevronDown, Menu } from "lucide-react";
+import { useAuth } from "../../context/auth";
 
 interface NavbarProps {
   onMenuClick: () => void;
 }
 
 export default function Navbar({ onMenuClick }: NavbarProps) {
+  const auth = useAuth();
+  let displayName = "Headmaster";
+  let displaySub = "Admin";
+  let initials = "H";
+
+  if (auth?.user) {
+    displayName = auth.user.name || displayName;
+    // prefer subject + className if available, otherwise fall back to email
+    displaySub = auth.user.subject && auth.user.className ? `${auth.user.subject} • ${auth.user.className}` : (auth.user.email || displaySub);
+    initials = (auth.user.name || "")
+      .split(" ")
+      .map((p: any) => p[0])
+      .slice(0, 2)
+      .join("")
+      .toUpperCase();
+  }
+
   return (
     <header className="bg-white border-b border-gray-200 sticky top-0 z-30">
       <div className="flex items-center justify-between p-4">
@@ -48,12 +66,12 @@ export default function Navbar({ onMenuClick }: NavbarProps) {
           
           {/* Profile */}
           <div className="flex items-center gap-2 cursor-pointer p-2 rounded-lg hover:bg-gray-100 transition-colors">
-            <div className="w-8 h-8 rounded-full bg-green-200 text-green-700 flex items-center justify-center">
-              <User className="w-4 h-4" />
+            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-indigo-500 text-white flex items-center justify-center font-semibold">
+              {initials}
             </div>
             <div className="hidden md:block">
-              <p className="font-semibold text-sm">Headmaster</p>
-              <p className="text-xs text-gray-500">Admin</p>
+              <p className="font-semibold text-sm">{displayName}</p>
+              <p className="text-xs text-gray-500">{displaySub}</p>
             </div>
             <ChevronDown className="w-4 h-4 text-gray-500" />
           </div>

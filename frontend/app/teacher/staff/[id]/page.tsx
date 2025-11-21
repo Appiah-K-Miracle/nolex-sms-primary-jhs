@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 import SummaryCards from "../../../../components/teacher/summary-cards";
+import LineChart from "../../../../components/charts/line-chart";
+import PieChart from "../../../../components/charts/pie-chart";
 
 type Staff = { id: string; name: string; staffId: string; role: string; department: string; contact: string; dob?: string };
 
@@ -40,7 +42,15 @@ export default function StaffProfile({ params }: { params: { id: string } }) {
 
           <div className="mt-6">
             <h3 className="font-semibold mb-2">Attendance Summary</h3>
-            <div className="w-full h-36 bg-gray-50 rounded flex items-center justify-center text-gray-400">Attendance chart placeholder</div>
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 items-center">
+              <div className="lg:col-span-2 bg-gray-50 rounded p-2">
+                <LineChart data={staffAttendanceTrend()} />
+              </div>
+              <div className="bg-gray-50 rounded p-2 text-center">
+                <PieChart data={staffPresentAbsent()} size={140} />
+                <div className="text-sm text-gray-600 mt-2">Present vs Absent (Month)</div>
+              </div>
+            </div>
           </div>
 
           <div className="mt-6">
@@ -82,4 +92,16 @@ export default function StaffProfile({ params }: { params: { id: string } }) {
       </div>
     </div>
   );
+}
+
+function staffAttendanceTrend(){
+  // mock monthly percent for last 6 months
+  return [98,97,96,98,95,97];
+}
+
+function staffPresentAbsent(){
+  return [
+    { label: 'Present', value: 420, color: '#34d399' },
+    { label: 'Absent', value: 12, color: '#f87171' }
+  ];
 }

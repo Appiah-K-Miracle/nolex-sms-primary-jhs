@@ -2,6 +2,12 @@
 
 import SummaryCards from "../../../../components/teacher/summary-cards";
 import { useState } from "react";
+import ScoreEntryTable from "../../../../components/assessment/score-entry-table";
+import Gradebook from "../../../../components/assessment/gradebook";
+import RemarksSuggestions from "../../../../components/assessment/remarks-suggestions";
+import BarChart from "../../../../components/charts/bar-chart";
+import PieChart from "../../../../components/charts/pie-chart";
+import LineChart from "../../../../components/charts/line-chart";
 
 export default function AssessmentClassPage() {
   // Mock metrics
@@ -39,21 +45,54 @@ export default function AssessmentClassPage() {
 
           {mode === 'single' ? (
             <div className="space-y-3">
-              <div className="w-full h-40 bg-gray-50 rounded flex items-center justify-center text-gray-400">Single score entry form placeholder</div>
+              <div>
+                <ScoreEntryTable
+                  students={[{id:'s1',name:'Ama Osei'},{id:'s2',name:'Kofi Mensah'},{id:'s3',name:'Esi Adjei'}]}
+                  mode="single"
+                  onSave={(rows)=>console.log('Saved CA rows',rows)}
+                />
+              </div>
             </div>
           ) : (
-            <div className="w-full h-48 bg-gray-50 rounded flex items-center justify-center text-gray-400">Bulk table entry / Excel import placeholder</div>
+            <div>
+              <ScoreEntryTable
+                students={[{id:'s1',name:'Ama Osei'},{id:'s2',name:'Kofi Mensah'},{id:'s3',name:'Esi Adjei'}]}
+                mode="bulk"
+                onSave={(rows)=>console.log('Bulk saved',rows)}
+              />
+            </div>
           )}
 
           <div className="mt-6">
             <h3 className="font-semibold mb-2">Gradebook (CA Only)</h3>
-            <div className="w-full h-40 bg-gray-50 rounded flex items-center justify-center text-gray-400">Gradebook placeholder (auto-grade, pass/fail)</div>
+            <Gradebook rows={[{id:'s1',name:'Ama Osei', ca: 78},{id:'s2',name:'Kofi Mensah',ca:62},{id:'s3',name:'Esi Adjei',ca:91}]} caWeight={1} examWeight={0} />
           </div>
         </div>
 
         <aside className="bg-white rounded-lg shadow-sm p-4">
           <h3 className="font-semibold mb-3">Class Performance Insights</h3>
-          <div className="w-full h-32 bg-gray-50 rounded flex items-center justify-center text-gray-400">Charts placeholder (trend / distribution)</div>
+          <div className="space-y-3">
+            <div>
+              <div className="text-xs text-gray-500 mb-2">Subject Average Comparison</div>
+              <div className="w-full h-28">
+                <BarChart data={[{label:'Math',value:78},{label:'English',value:72},{label:'Science',value:69},{label:'ICT',value:82}]} />
+              </div>
+            </div>
+
+            <div className="flex gap-3 items-center">
+              <div className="w-28">
+                <div className="text-xs text-gray-500 mb-2">Grade Distribution</div>
+                <PieChart data={[{label:'A',value:2,color:'#34d399'},{label:'B',value:5,color:'#60a5fa'},{label:'C',value:1,color:'#fbbf24'}]} size={120} />
+              </div>
+
+              <div className="flex-1">
+                <div className="text-xs text-gray-500 mb-2">Trend (Last 5)</div>
+                <div className="h-20">
+                  <LineChart data={[72,75,78,77,80]} />
+                </div>
+              </div>
+            </div>
+          </div>
           <div className="mt-4 text-sm text-gray-600">
             <div>Top performers: 3 students</div>
             <div>Students struggling: 5 students</div>
@@ -64,7 +103,18 @@ export default function AssessmentClassPage() {
 
       <div className="mt-6 bg-white rounded-lg shadow-sm p-4">
         <h3 className="font-semibold mb-3">Remarks & Feedback</h3>
-        <div className="w-full h-28 bg-gray-50 rounded flex items-center justify-center text-gray-400">Remarks input & suggestions placeholder</div>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+          <div className="lg:col-span-2">
+            <textarea placeholder="Enter remarks for class..." className="w-full h-28 border rounded p-2" />
+            <div className="mt-2">
+              <button className="px-3 py-2 bg-blue-600 text-white rounded">Save Remarks</button>
+            </div>
+          </div>
+          <div>
+            <h4 className="font-semibold mb-2">Suggested Remarks</h4>
+            <RemarksSuggestions score={75} />
+          </div>
+        </div>
       </div>
     </div>
   );

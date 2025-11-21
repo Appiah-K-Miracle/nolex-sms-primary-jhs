@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import SummaryCards from "../../../../components/teacher/summary-cards";
+import BarChart from "../../../../components/charts/bar-chart";
 
 const exams = [
   { id: 'e1', title: 'Math Mid-term', class: 'JHS 2', date: '2025-12-01', time: '10:00', type: 'Mid-term' }
@@ -53,9 +54,39 @@ export default function ExamsPage() {
 
         <div className="bg-white rounded-lg shadow-sm p-4">
           <h3 className="font-semibold mb-3">Performance Analytics</h3>
-          <div className="w-full h-40 bg-gray-50 rounded flex items-center justify-center text-gray-400">Score distribution chart</div>
+          <div className="w-full">
+            {/* Mock scores; replace with API data later */}
+            {/* Example: compute distribution over 0-100 into ranges */}
+            <ScoreDistribution />
+          </div>
         </div>
       </div>
+    </div>
+  );
+}
+
+function ScoreDistribution() {
+  // mock raw scores
+  const scores = [95, 88, 76, 67, 54, 42, 89, 73, 61, 80, 92, 55, 47, 68, 77, 84, 90, 100, 33, 59];
+
+  const ranges = [
+    { label: '0-39', min: 0, max: 39 },
+    { label: '40-49', min: 40, max: 49 },
+    { label: '50-59', min: 50, max: 59 },
+    { label: '60-69', min: 60, max: 69 },
+    { label: '70-79', min: 70, max: 79 },
+    { label: '80-89', min: 80, max: 89 },
+    { label: '90-100', min: 90, max: 100 },
+  ];
+
+  const data = ranges.map(r => ({
+    label: r.label,
+    value: scores.filter(s => s >= r.min && s <= r.max).length,
+  }));
+
+  return (
+    <div className="w-full h-44">
+      <BarChart data={data} />
     </div>
   );
 }

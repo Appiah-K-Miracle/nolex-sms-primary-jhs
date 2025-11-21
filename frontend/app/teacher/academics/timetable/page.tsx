@@ -2,6 +2,7 @@
 
 import React from 'react';
 import SummaryCards from "../../../../components/teacher/summary-cards";
+import TimetableGrid from "../../../../components/academics/timetable-grid";
 
 const daily = [
   { day: 'Monday', periods: [{ time: '08:00', subject: 'Math', class: 'JHS 2', room: 'Rm 12' }] },
@@ -48,7 +49,12 @@ export default function TimetablePage() {
           </div>
 
           <h3 className="font-semibold mt-6 mb-2">Weekly Timetable (Grid)</h3>
-          <div className="w-full h-56 bg-gray-50 rounded flex items-center justify-center text-gray-400">Grid placeholder</div>
+          {/* Build a simple weekly grid: times on rows, days on columns */}
+          <TimetableGrid
+            days={["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]}
+            times={["08:00", "09:00", "10:00", "11:00", "12:00", "13:00"]}
+            entries={daily.flatMap(d => d.periods.map(p => ({ day: d.day, time: p.time, subject: p.subject, className: p.class, room: p.room })))}
+          />
         </div>
 
         <div className="bg-white rounded-lg shadow-sm p-4">

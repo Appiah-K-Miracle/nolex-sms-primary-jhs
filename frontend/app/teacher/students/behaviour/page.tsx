@@ -2,6 +2,9 @@
 
 import { useMemo, useState } from "react";
 import SummaryCards from "../../../../components/teacher/summary-cards";
+import PieChart from "../../../../components/charts/pie-chart";
+import BarChart from "../../../../components/charts/bar-chart";
+import LineChart from "../../../../components/charts/line-chart";
 
 type BehaviourRecord = {
   id: string;
@@ -43,6 +46,21 @@ export default function BehaviourPage() {
     { title: 'Students with Repeated Incidents', value: repeated }
   ];
 
+  // build chart data
+  const posNegData = [
+    { label: 'Positive', value: positive },
+    { label: 'Negative/Warning', value: negative }
+  ];
+
+  const freqMap = records.reduce((m: Record<string, number>, r) => {
+    m[r.category] = (m[r.category] || 0) + 1;
+    return m;
+  }, {});
+  const freqData = Object.entries(freqMap).map(([label, value]) => ({ label, value }));
+
+  // trend: counts per recent 6 periods (mock weeks)
+  const trend = [2, 1, 3, 0, 2, total];
+
   function addRecord(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const form = e.currentTarget;
@@ -67,6 +85,29 @@ export default function BehaviourPage() {
       </div>
 
       <SummaryCards cards={cards} />
+
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-4">
+        <div className="bg-white rounded-lg shadow-sm p-4">
+          <h4 className="font-semibold mb-2">Positive vs Negative</h4>
+          <div className="flex items-center justify-center">
+            <PieChart data={posNegData} size={140} />
+          </div>
+        </div>
+
+        <div className="bg-white rounded-lg shadow-sm p-4">
+          <h4 className="font-semibold mb-2">Most Frequent Behaviour Types</h4>
+          <div className="w-full h-32">
+            <BarChart data={freqData.length ? freqData : [{label: 'None', value: 0}]} />
+          </div>
+        </div>
+
+        <div className="bg-white rounded-lg shadow-sm p-4">
+          <h4 className="font-semibold mb-2">Behaviour Trend</h4>
+          <div className="w-full h-32">
+            <LineChart data={trend} />
+          </div>
+        </div>
+      </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-2 bg-white rounded-lg shadow-sm p-4">

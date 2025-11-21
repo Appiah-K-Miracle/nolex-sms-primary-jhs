@@ -140,9 +140,82 @@ function CommunicationDropdown({ pathname }: { pathname: string }) {
   );
 }
 
+function ReportsDropdown({ pathname }: { pathname: string }) {
+  const [open, setOpen] = useState(pathname.startsWith('/teacher/reports'));
+
+  return (
+    <>
+      <button onClick={() => setOpen(!open)} className={`w-full flex items-center justify-between gap-3 p-3 rounded-lg text-sm font-medium ${pathname.startsWith('/teacher/reports') ? 'bg-indigo-50 text-indigo-700' : 'hover:bg-gray-50 text-gray-700'}`}>
+        <div className="flex items-center gap-3">
+          <BarChart3 className="w-4 h-4 text-gray-500" />
+          <span>Reports</span>
+        </div>
+        <ChevronDown className={`w-4 h-4 transition-transform ${open ? 'rotate-180' : 'rotate-0'}`} />
+      </button>
+
+      {open && (
+        <ul className="mt-2 ml-6 space-y-1">
+          <li>
+            <Link href="/teacher/reports/class" className={`block p-2 text-sm rounded ${pathname === '/teacher/reports/class' ? 'bg-indigo-50 text-indigo-700' : 'text-gray-700 hover:bg-gray-50'}`}>Class</Link>
+          </li>
+          <li>
+            <Link href="/teacher/reports/students" className={`block p-2 text-sm rounded ${pathname === '/teacher/reports/students' ? 'bg-indigo-50 text-indigo-700' : 'text-gray-700 hover:bg-gray-50'}`}>Students</Link>
+          </li>
+          <li>
+            <Link href="/teacher/reports/lesson-notes" className={`block p-2 text-sm rounded ${pathname === '/teacher/reports/lesson-notes' ? 'bg-indigo-50 text-indigo-700' : 'text-gray-700 hover:bg-gray-50'}`}>Lesson Notes</Link>
+          </li>
+        </ul>
+      )}
+    </>
+  );
+}
+
+function SettingsDropdown({ pathname }: { pathname: string }) {
+  const [open, setOpen] = useState(pathname.startsWith('/teacher/settings'));
+
+  return (
+    <>
+      <button onClick={() => setOpen(!open)} className={`w-full flex items-center justify-between gap-3 p-3 rounded-lg text-sm font-medium ${pathname.startsWith('/teacher/settings') ? 'bg-indigo-50 text-indigo-700' : 'hover:bg-gray-50 text-gray-700'}`}>
+        <div className="flex items-center gap-3">
+          <Settings className="w-4 h-4 text-gray-500" />
+          <span>Settings</span>
+        </div>
+        <ChevronDown className={`w-4 h-4 transition-transform ${open ? 'rotate-180' : 'rotate-0'}`} />
+      </button>
+
+      {open && (
+        <ul className="mt-2 ml-6 space-y-1">
+          <li>
+            <Link href="/teacher/settings/profile" className={`block p-2 text-sm rounded ${pathname === '/teacher/settings/profile' ? 'bg-indigo-50 text-indigo-700' : 'text-gray-700 hover:bg-gray-50'}`}>Profile</Link>
+          </li>
+          <li>
+            <Link href="/teacher/settings/account" className={`block p-2 text-sm rounded ${pathname === '/teacher/settings/account' ? 'bg-indigo-50 text-indigo-700' : 'text-gray-700 hover:bg-gray-50'}`}>Account</Link>
+          </li>
+        </ul>
+      )}
+    </>
+  );
+}
+
 export default function TeacherSidebar({ isOpen, onClose }: SidebarProps) {
   const pathname = usePathname() || "";
   const [academicsOpen, setAcademicsOpen] = useState(pathname.startsWith("/teacher/academics"));
+  // read from auth context
+  let teacherName = 'Teacher Portal';
+  let teacherInitials = 'T';
+  try {
+    // dynamic import of context hook
+    // `useAuth` is client-only; call inside component
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const { useAuth } = require('../../context/auth');
+    const auth = useAuth();
+    if (auth && auth.user) {
+      teacherName = auth.user.name;
+      teacherInitials = auth.user.name.split(' ').map((p:any)=>p[0]).slice(0,2).join('');
+    }
+  } catch (e) {
+    // fallback to defaults
+  }
 
   return (
     <>
@@ -152,21 +225,22 @@ export default function TeacherSidebar({ isOpen, onClose }: SidebarProps) {
       />
 
       <aside className={`fixed lg:static inset-y-0 left-0 z-50 w-72 lg:w-64 bg-white border-r border-gray-100 transform transition-transform ${isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}>
-        <div className="flex items-center justify-between p-4 border-b border-gray-100">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-indigo-500 rounded flex items-center justify-center text-white font-semibold">T</div>
-            <div>
-              <h4 className="text-sm font-semibold">Teacher Portal</h4>
-              <p className="text-xs text-gray-500">Classroom Tools</p>
-            </div>
+        <div className="flex flex-col h-full">
+          <div className="flex items-center justify-between p-4 border-b border-gray-100">
+            <div className="flex items-center gap-3">
+                <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-indigo-500 rounded flex items-center justify-center text-white font-semibold">{teacherInitials}</div>
+                <div>
+                  <h4 className="text-sm font-semibold">{teacherName}</h4>
+                  <p className="text-xs text-gray-500">Teacher Portal</p>
+                </div>
+              </div>
+            <button className="lg:hidden p-2 text-gray-500" onClick={onClose} aria-label="Close sidebar">
+              <X className="w-5 h-5" />
+            </button>
           </div>
-          <button className="lg:hidden p-2 text-gray-500" onClick={onClose} aria-label="Close sidebar">
-            <X className="w-5 h-5" />
-          </button>
-        </div>
 
-        <nav className="p-4 overflow-y-auto h-full">
-          <ul className="space-y-1">
+          <nav className="p-4 overflow-y-auto flex-1">
+            <ul className="space-y-1">
             <li>
               {/** Dashboard link - active state */}
               <Link
@@ -232,20 +306,36 @@ export default function TeacherSidebar({ isOpen, onClose }: SidebarProps) {
             </li>
 
             <li>
-              <Link href="/teacher/reports" className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 text-sm font-medium text-gray-700">
-                <BarChart3 className="w-4 h-4 text-gray-500" />
-                <span>Report</span>
-              </Link>
+              <ReportsDropdown pathname={pathname} />
             </li>
 
             <li>
-              <Link href="/teacher/settings" className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 text-sm font-medium text-gray-700">
-                <Settings className="w-4 h-4 text-gray-500" />
-                <span>Settings</span>
-              </Link>
+              <SettingsDropdown pathname={pathname} />
             </li>
           </ul>
-        </nav>
+          </nav>
+
+          {/* Footer: online teacher + copyright/version */}
+          <div className="border-t p-4 bg-gray-50">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="relative">
+                  <div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center text-sm font-semibold">{teacherInitials}</div>
+                  <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-green-500 border-2 border-white rounded-full" title="Online" />
+                </div>
+                <div>
+                  <div className="text-sm font-medium">{teacherName}</div>
+                  <div className="text-xs text-green-600">Online</div>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-3 text-xs text-gray-500">
+              <div>© 2025 Nolex SMS</div>
+              <div>Teacher Portal v2.1.0</div>
+            </div>
+          </div>
+        </div>
       </aside>
     </>
   );

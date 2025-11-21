@@ -3,9 +3,25 @@
 import { useState } from "react";
 import TeacherSidebar from "@/components/teacher/sidebar";
 import { Menu, Search, Bell } from "lucide-react";
+import { useAuth } from "../../context/auth";
 
 export default function TeacherLayout({ children }: { children: React.ReactNode }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const auth = useAuth();
+  let teacherName = "Mr. K. Ofori";
+  let teacherSub = "Mathematics • JHS 2";
+  let initials = "KO";
+
+  if (auth?.user) {
+    teacherName = auth.user.name || teacherName;
+    teacherSub = auth.user.subject && auth.user.className ? `${auth.user.subject} • ${auth.user.className}` : (auth.user.email || teacherSub);
+    initials = (auth.user.name || "")
+      .split(" ")
+      .map((p: any) => p[0])
+      .slice(0, 2)
+      .join("")
+      .toUpperCase();
+  }
 
   return (
     <div className="h-screen flex bg-gray-50 overflow-hidden">
@@ -37,11 +53,11 @@ export default function TeacherLayout({ children }: { children: React.ReactNode 
               <button className="md:hidden p-2 rounded-lg text-gray-500 hover:bg-gray-100 transition-colors"><Search className="w-5 h-5" /></button>
               <button className="relative p-2 rounded-lg text-gray-500 hover:bg-gray-100 transition-colors"><Bell className="w-5 h-5 lg:w-6 lg:h-6" /><span className="absolute top-1 right-1 block h-2 w-2 rounded-full bg-red-500 ring-2 ring-white"></span></button>
               <div className="flex items-center space-x-3">
-                <div className="hidden lg:block text-right">
-                  <p className="text-sm font-medium text-gray-900">Mr. K. Ofori</p>
-                  <p className="text-xs text-gray-500">Mathematics • JHS 2</p>
-                </div>
-                <div className="w-8 h-8 lg:w-10 lg:h-10 bg-gradient-to-br from-indigo-500 to-blue-500 rounded-full flex items-center justify-center text-white">KO</div>
+                  <div className="hidden lg:block text-right">
+                    <p className="text-sm font-medium text-gray-900">{teacherName}</p>
+                    <p className="text-xs text-gray-500">{teacherSub}</p>
+                  </div>
+                  <div className="w-8 h-8 lg:w-10 lg:h-10 bg-gradient-to-br from-indigo-500 to-blue-500 rounded-full flex items-center justify-center text-white font-semibold">{initials}</div>
               </div>
             </div>
           </div>

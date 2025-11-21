@@ -2,7 +2,7 @@
 
 import SummaryCards from "../../../../components/teacher/summary-cards";
 import Link from "next/link";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import BarChart from "../../../../components/charts/bar-chart";
 
 export default function MessagesPage(){
@@ -15,6 +15,19 @@ export default function MessagesPage(){
 	];
 
 	const [query, setQuery] = useState('');
+
+	const [conversations, setConversations] = useState(() => ([
+		{ id: 'c1', name: 'Parent - Mr. Osei', last: 'Thanks, I will attend the meeting.', time: '10:12', unread: 2, avatar: '' },
+		{ id: 'c2', name: 'Principal', last: 'Reminder: staff meeting tomorrow.', time: '09:05', unread: 0, avatar: '' },
+		{ id: 'c3', name: 'Student - Kofi', last: 'Can I submit my assignment late?', time: 'Yesterday', unread: 1, avatar: '' },
+	]));
+
+	const filtered = useMemo(() => conversations.filter(c => c.name.toLowerCase().includes(query.toLowerCase()) || c.last.toLowerCase().includes(query.toLowerCase())), [conversations, query]);
+
+	function openConversation(id:string){
+		// navigate to chat page - simple replacement for now
+		window.location.href = `/teacher/communication/chat?conv=${id}`;
+	}
 
 	return (
 		<div className="p-4 lg:p-6">
@@ -32,7 +45,24 @@ export default function MessagesPage(){
 			<div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
 				<div className="lg:col-span-2 bg-white rounded-lg shadow-sm p-4">
 					<h3 className="font-semibold mb-3">Inbox</h3>
-					<div className="w-full h-64 bg-gray-50 rounded flex items-center justify-center text-gray-400">Message list / chat preview placeholder</div>
+					<div className="divide-y">
+						{filtered.length === 0 && (
+							<div className="w-full h-40 bg-gray-50 rounded flex items-center justify-center text-gray-400">No messages</div>
+						)}
+						{filtered.map(c => (
+							<div key={c.id} className="flex items-start gap-3 p-3 hover:bg-gray-50 cursor-pointer" onClick={()=>openConversation(c.id)}>
+								<div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center text-sm font-semibold">{c.name.split(' ').map(p=>p[0]).slice(0,2).join('')}</div>
+								<div className="flex-1">
+									<div className="flex items-center justify-between">
+										<div className="font-medium">{c.name}</div>
+										<div className="text-xs text-gray-500">{c.time}</div>
+									</div>
+									<div className="text-sm text-gray-600 truncate">{c.last}</div>
+								</div>
+								{c.unread > 0 && <div className="ml-2 bg-blue-600 text-white text-xs px-2 py-1 rounded-full">{c.unread}</div>}
+							</div>
+						))}
+					</div>
 				</div>
 
 				<aside className="bg-white rounded-lg shadow-sm p-4">

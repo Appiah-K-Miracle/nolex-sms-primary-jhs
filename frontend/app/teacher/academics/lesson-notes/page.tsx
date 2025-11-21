@@ -1,13 +1,18 @@
 "use client";
 
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { FileText } from 'lucide-react';
 import SummaryCards from "../../../../components/teacher/summary-cards";
+import LineChart from "../../../../components/charts/line-chart";
+import PieChart from "../../../../components/charts/pie-chart";
+import BarChart from "../../../../components/charts/bar-chart";
 
 export default function LessonNotesPage() {
   const [notes, setNotes] = useState([{
     week: 1, subject: 'Mathematics', className: 'JHS 2', date: '2025-11-01', status: 'Pending', comments: ''
   }]);
+
+  const [range, setRange] = useState('7');
 
   const submittedThisTerm = 42;
   const pendingApproval = 5;
@@ -98,11 +103,53 @@ export default function LessonNotesPage() {
 
           <div className="mt-4">
             <h4 className="font-semibold">Analytics</h4>
-            <div className="mt-2 w-full h-32 bg-gray-50 rounded flex items-center justify-center text-gray-400">Line chart placeholder</div>
-            <div className="mt-3 w-full h-24 bg-gray-50 rounded flex items-center justify-center text-gray-400">Pie chart placeholder</div>
+
+            <div className="mt-2">
+              <label className="text-xs text-gray-500">Time range</label>
+              <select className="w-full border rounded px-2 py-1 text-sm my-2" onChange={(e)=>setRange(e.target.value)} value={range}>
+                <option value="7">Last 7 days</option>
+                <option value="30">Last 30 days</option>
+                <option value="90">Last 90 days</option>
+              </select>
+            </div>
+
+            <div className="mt-2">
+              <div className="text-xs text-gray-500 mb-2">Submissions over time</div>
+              <div className="h-32"><LineChart data={weeklyData(range)} /></div>
+            </div>
+
+            <div className="mt-3">
+              <div className="text-xs text-gray-500 mb-2">Status distribution</div>
+              <div className="flex items-center gap-3">
+                <div className="w-24 h-24"><PieChart data={[{label:'Approved',value:approved},{label:'Pending',value:pendingApproval},{label:'Rejected',value:rejected}]} size={96} /></div>
+                <div className="flex-1">
+                  <div className="text-xs text-gray-500 mb-2">Submissions by subject</div>
+                  <div className="h-24"><BarChart data={submissionsBySubject()} /></div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   );
+}
+
+// Mock analytic helpers
+function weeklyData(range: string | number){
+  const days = Number(range);
+  // create simple trend: base + noise
+  const base = 5;
+  const arr: number[] = [];
+  for(let i=0;i<Math.max(7, days);i++) arr.push(Math.max(0, Math.round(base + Math.sin(i/3)*2 + (i%3))));
+  return arr.slice(-7);
+}
+
+function submissionsBySubject(){
+  return [
+    { label: 'Math', value: 12 },
+    { label: 'English', value: 9 },
+    { label: 'Science', value: 7 },
+    { label: 'Social', value: 4 }
+  ];
 }
