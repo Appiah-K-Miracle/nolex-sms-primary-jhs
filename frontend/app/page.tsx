@@ -115,13 +115,30 @@ export default function Home() {
       </a>
 
       {/* Hero Section */}
-      <section className="relative overflow-hidden min-h-screen flex items-center bg-gradient-to-br from-green-900 via-green-800 to-blue-900">
-        {/* Dynamic Background Elements */}
-        <div className="absolute inset-0 overflow-hidden">
+      <section className="relative overflow-hidden min-h-screen flex items-center">
+        {/* Background Video */}
+        <div className="absolute inset-0">
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="w-full h-full object-cover"
+            poster="/video-poster.jpg"
+          >
+            <source src="/School_Management_System_Background_Video.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          {/* Video Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-br from-green-900/80 via-green-800/70 to-blue-900/80"></div>
+        </div>
+
+        {/* Dynamic Background Elements - Overlaid on video */}
+        <div className="absolute inset-0 overflow-hidden z-10">
           {/* Animated Gradient Orbs */}
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-green-400/30 to-cyan-400/30 rounded-full mix-blend-multiply filter blur-xl animate-pulse"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gradient-to-r from-blue-400/30 to-purple-400/30 rounded-full mix-blend-multiply filter blur-xl animate-pulse delay-1000"></div>
-          <div className="absolute top-1/2 right-1/3 w-64 h-64 bg-gradient-to-r from-cyan-400/20 to-green-400/20 rounded-full mix-blend-multiply filter blur-xl animate-pulse delay-500"></div>
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-green-400/20 to-cyan-400/20 rounded-full mix-blend-multiply filter blur-xl animate-pulse"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gradient-to-r from-blue-400/20 to-purple-400/20 rounded-full mix-blend-multiply filter blur-xl animate-pulse delay-1000"></div>
+          <div className="absolute top-1/2 right-1/3 w-64 h-64 bg-gradient-to-r from-cyan-400/15 to-green-400/15 rounded-full mix-blend-multiply filter blur-xl animate-pulse delay-500"></div>
           
           {/* Floating Icons */}
           <div className="absolute top-20 left-20 text-white/10 animate-float">
@@ -138,7 +155,7 @@ export default function Home() {
           <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-20">
+        <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-20">
           <div className="text-center text-white">
             {/* Premium Badge */}
             <div className="inline-flex items-center gap-3 bg-gradient-to-r from-green-500/20 to-blue-500/20 backdrop-blur-xl text-white px-8 py-4 rounded-full text-sm font-semibold mb-12 border border-white/20 shadow-2xl">
